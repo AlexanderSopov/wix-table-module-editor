@@ -1,0 +1,20 @@
+{
+  "name": "alexandersopov-website",
+  "version": "1.0.0",
+  "description": "Personal Website and Portfolio of owner and ceo of TeddyBear Studio, Alexander Sopov",
+  "main": "build-script.js",
+  "scripts": {
+    "run": "node build-script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderSopov/personal-website.git"
+  },
+  "author": "Alexander Sopov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexanderSopov/personal-website/issues"
+  },
+  "homepage": "https://github.com/AlexanderSopov/personal-website#readme"
+}
