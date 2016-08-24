@@ -20,5 +20,8 @@
   "dependencies": {
     "pug": "^0.1.0",
     "stylus": "^0.54.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
   }
 }

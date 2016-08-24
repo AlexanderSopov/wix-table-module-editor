@@ -1,57 +1,256 @@
-headerHeight = 30vh
-pageHeight = 100vh - headerHeight
-padding = 3vh
-fullscreenHeader = 100vh - 2*padding
+pageHeight = calc(100vh - 110px)
+fullscreenHeader = 100vh
+
 @font-face 
 	font-family: archive
 	src: url(archive-font/Archive.otf) /* Safari, Android, iOS */
-body
-	margin:0px
+*
+	margin 0px
 	padding 0px
+.container
+	padding-top:calc( (100vh - 450px) / 2)
+	margin-left auto
+	margin-right auto
+	width 290px
+	height 450px
+	display flex
+	flex-wrap wrap
 header
-	background-color:#7d4627
+	position relative
+	background-color #c0b283
 	height fullscreenHeader
-	color #F6F7F9
-	padding padding
-	text-align center
-	.header-img
+	width 100%
+	color #373737
+	.container
+		text-align center
+		.header-img
+			width 100%
+			height auto
+			img
+				width 100%
+		.headlines
+			width 100%
+			h1
+				font-size 2.5em
+				margin 3vh 0px 2vh 0px
+			h2
+				font-size:1.3em
+				margin: 2vh 0px 2vh 0px
+		p
+			display block
+			width:100%
+			font-size 1em
+		.navbar
+			width:100%
+			ul
+				list-style-type none
+				margin-left auto
+				margin-right auto
+				li
+					display inline
+					button
+						color #373737
+						background-color inherit
+						border 0px
+						padding 2vh 2vh 0vh 2vh
+						font-size 1em
+header.sticky
+	h1#stickyTitle
+		text-align center
 		width:100%
-	h1
-		font-size:2.5em
-		margin: 3vh 0px 2vh 0px
-	h2
-		font-size:1.3em
-		margin: 2vh 0px 2vh 0px
-	p
-		font-size 0.9em
+		position absolute
+		bottom: 35px
+		font-size: 2em;
+		transition all 1s ease
 	.navbar
+		position absolute
+		bottom 0px
+		left 0px
+		transition all 1s ease
 		ul
-			margin 2vh 0px 0px 0px
-			padding 0px
-			list-style-type none
 			li
-				display inline
 				button
-					color #F7F7F7
-					background-color inherit
-					border 0px
-					padding 2vh
-					font-size 1em
+					padding 5px
+					font-size 0.7em
+					transition all 1s ease
 .page
 	height pageHeight
-	color:#494141
+	color #494141
 	padding: 15px
-.page, .content
+.page, .content, #stickyTitle
 	display:none
 .active
 	display:block
 #Skills
-	background-color:#a8b6bf
+	background-color:#f4f4f4
 #Projects
-	background-color:#c9d8c5
+	background-color:#dcd0c0
 #Experience
 	background-color:#edd9c0
 #Contact
 	background-color:#fff
 .tk-bebas-neue
 	letter-spacing 3px
+
+@media only screen and (min-width 375px)
+	header
+		.container
+			padding-top:calc( (100vh - 637px) / 2)
+			height 637px
+			width 345px
+			.headlines
+				h1
+					font-size 3em
+					margin -10px 0px 15px 0px
+				h2
+					font-size:1.5em
+					margin: 10px 0px 5px 0px
+				p
+					font-size 1.1em
+			.navbar
+				ul
+					li
+						button
+							padding 2vh
+							font-size 1em
+
+			
+@media only screen and (min-width 520px)
+	pageHeight = calc(100vh - 150px)
+	.page
+		height pageHeight
+	header
+		.container
+			padding-top:calc( (100vh - 800px) / 2)
+			height 800px
+			width: 490px
+			.headlines
+				h1
+					font-size 3.2em
+					margin -10px 0px 15px 0px
+				h2
+					font-size:1.7em
+					margin: 10px 0px 5px 0px
+				p
+					font-size 1.2em
+			.navbar ul li button
+				font-size 1.2em
+	header.sticky
+		h1#stickyTitle
+			font-size:4em;
+		.container .navbar ul li button
+			padding:10px
+			font-size 0.9em							
+
+@media only screen and (min-width 770px)
+	header
+		.container
+			padding-top:calc( (100vh - 1000px) / 2)
+			height 1000px
+			width: 740px
+			.headlines
+				h1
+					font-size 3.2em
+					margin -10px 0px 15px 0px
+				h2
+					font-size:1.7em
+					margin: 10px 0px 5px 0px
+				p
+					font-size 1.2em
+			.navbar ul li button
+				font-size 1.3em
+
+
+
+
+@media only screen and (orientation: landscape)
+	pageHeight = calc(100vh - 110px)
+	.page
+		height pageHeight
+	header
+		.container
+			width 450px
+			height 280px
+			padding-top:calc( (100vh - 280px) / 2)
+			.header-img
+				width calc(45% - 15px)
+			.headlines
+				text-align left
+				width 55%
+				margin-left:15px
+				h1
+					margin-top 0px
+					padding-bottom 10px
+					font-size 2.5em
+				h2
+					font-size 1.5em
+			p
+				font-size 1.5em
+			.navbar
+				width: 100%
+				ul li button
+					font-size 1em
+	header.sticky
+		h1#stickyTitle
+			font-size 2em
+		.container .navbar ul li button
+			font-size 0.7em	
+
+
+	@media only screen and (min-width 650px)
+		pageHeight = calc(100vh - 150px)
+		.page
+			height pageHeight
+		header .container
+			width 620px
+			height 345px
+			padding-top:calc( (100vh - 345px) / 2)
+			.headlines
+				h1
+					font-size 3.4em
+				h2
+					font-size 2.2em
+			p
+				font-size 1.8em
+				margin: 15px 0 15px 0px
+		header.sticky
+			h1#stickyTitle
+				font-size 4em;
+				bottom 50px
+			.container .navbar ul li button
+				padding 10px
+				font-size 1em	
+
+	@media only screen and (min-width 768px)
+		header .container
+			width 738px
+			height 400px
+			padding-top:calc( (100vh - 400px) / 2)
+			.headlines
+				h1
+					font-size 4em
+				h2
+					font-size 2.6em
+			p
+				font-size 2em
+				margin: 30px 0 30px 0px
+
+	@media only screen and (min-width 1024px)
+		header .container
+			width 850px
+			height 600px
+			padding-top:calc( (100vh - 600px) / 2)
+			.header-img
+				width calc(50% - 15px)
+			.headlines
+				width 50%
+			.headlines
+				h1
+					font-size 4.3em
+				h2
+					font-size 2.8em
+			p
+				font-size 2.3em
+				margin: 50px 0 40px 0px
+			.navbar ul li button
+				font-size 1.4em

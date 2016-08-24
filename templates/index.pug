@@ -7,22 +7,26 @@ html(lang="en")
     meta(name="author", content="Alexander Sopov")
     meta(name="viewport", content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no")
     link(rel="stylesheet", href="css/style.css")
-    script(src="https://code.jquery.com/jquery-1.12.4.min.js")
+    script(src="https://code.jquery.com/jquery-2.2.4.min.js")
     script(src="js/script.js")
     script(src="https://use.typekit.net/dql6fkf.js")
   body
     header(class="tk-bebas-neue")
-      img(class="header-img", src="img/headerImg.jpg")
-      h1=heading
-      h2=subheading
-      p(class="tk-source-sans-pro")
-        i=slogan
-      .navbar
-        ul
-          - for (var i=0; i<pages.length;i++)
-            - var title = pages[i].title, url = "#"+title;
-            li(class="tk-source-sans-pro")
-              button(onclick="script.openPage(this)") #{title}
+      .container
+        .header-img
+          img(src="img/headerImg.jpg")
+        .headlines
+          h1=heading
+          h2=subheading
+        p(class="tk-source-sans-pro")
+          i=slogan
+        .navbar
+          ul
+            - for (var i=0; i<pages.length;i++)
+              - var title = pages[i].title, url = "#"+title;
+              li(class="tk-source-sans-pro")
+                button(onclick="script.openPage(this)") #{title}
+      h1#stickyTitle.tk-bebas-neue=heading
     - for(var i=0; i<pages.length;i++)
       - var page = pages[i];
         if page.content
