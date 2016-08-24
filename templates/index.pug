@@ -24,8 +24,8 @@ html(lang="en")
           ul
             - for (var i=0; i<pages.length;i++)
               - var title = pages[i].title, url = "#"+title;
-              li(class="tk-source-sans-pro")
-                button(onclick="script.openPage(this)") #{title}
+              li
+                button(onclick="script.openPage(this)" class="tk-bebas-neue") #{title}
       h1#stickyTitle.tk-bebas-neue=heading
     - for(var i=0; i<pages.length;i++)
       - var page = pages[i];
@@ -34,6 +34,7 @@ html(lang="en")
             - for(var j=0; j<page.content.length;j++)
               - var content = page.content[j];
               div(id=content.h1, class=j==0 ? 'content active' : 'content')
+                div(class="pattern")
                 h1(class="tk-bebas-neue") #{content.h1}
                 h2(class="tk-bebas-neue") #{content.h2}
                 - for(var k=0; k<content.p.length;k++)

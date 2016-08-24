@@ -42,7 +42,7 @@ $(document).ready(function(){
 	}
 
 	$(window).scroll(function() {
-		if ($(this).scrollTop() > 50){
+		if ($(this).scrollTop() > 150){
 			headlines.hide();
 			headerImg.hide();
 			stickyTitle.show();

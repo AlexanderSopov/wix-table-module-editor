@@ -1,4 +1,4 @@
-pageHeight = calc(100vh - 110px)
+pageHeight = calc(100vh - 150px)
 fullscreenHeader = 100vh
 
 @font-face 
@@ -7,6 +7,15 @@ fullscreenHeader = 100vh
 *
 	margin 0px
 	padding 0px
+body
+	background:
+	radial-gradient(circle farthest-side at 0% 50%,#fb1 23.5%,rgba(240,166,17,0) 0)21px 30px,
+	radial-gradient(circle farthest-side at 0% 50%,#B71 24%,rgba(240,166,17,0) 0)19px 30px,
+	linear-gradient(#fb1 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,#fb1 0)0 0,
+	linear-gradient(150deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
+	linear-gradient(30deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
+	linear-gradient(90deg,#B71 2%,#fb1 0,#fb1 98%,#B71 0%)0 0 #fb1;
+	background-size:40px 60px;
 .container
 	padding-top:calc( (100vh - 450px) / 2)
 	margin-left auto
@@ -17,7 +26,7 @@ fullscreenHeader = 100vh
 	flex-wrap wrap
 header
 	position relative
-	background-color #c0b283
+	background-color rgba(192,178,131,0.9)
 	height fullscreenHeader
 	width 100%
 	color #373737
@@ -59,21 +68,47 @@ header.sticky
 		text-align center
 		width:100%
 		position absolute
-		bottom: 35px
+		bottom: 70px
 		font-size: 2em;
 		transition all 1s ease
 	.navbar
 		position absolute
-		bottom 0px
-		left 0px
+		bottom 2px
+		left calc( (100vw - 290px) / 2)
+		width 290px
 		transition all 1s ease
 		ul
 			li
 				button
-					padding 5px
-					font-size 0.7em
+					padding 5px 15px 5px 15px
 					transition all 1s ease
+.pattern
+	position absolute
+	top 0px
+	left 0px
+	z-index:-99
+	width 100%
+	height 100%
+	background:
+	linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
+	linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
+	background-color:#708090;
+	background-size: 64px 128px
+	/*background-color: gray;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+	*//*background:
+	linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+	linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+	linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+	linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+	linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+	linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+	background-color: #131313;
+	background-size: 20px 20px;
+	*/
+	
 .page
+	position relative
 	height pageHeight
 	color #494141
 	padding: 15px
@@ -82,13 +117,13 @@ header.sticky
 .active
 	display:block
 #Skills
-	background-color:#f4f4f4
+	background-color rgba(244, 244, 244,0.9)
 #Projects
-	background-color:#dcd0c0
+	background-color rgba(220, 208, 192,0.9)
 #Experience
-	background-color:#edd9c0
+	background-color rgba(237, 217, 192,0.9)
 #Contact
-	background-color:#fff
+	background-color rgba(255, 255, 255,0.9)
 .tk-bebas-neue
 	letter-spacing 3px
 
@@ -105,18 +140,17 @@ header.sticky
 				h2
 					font-size:1.5em
 					margin: 10px 0px 5px 0px
-				p
-					font-size 1.1em
+			p
+				font-size 1.5em
 			.navbar
-				ul
-					li
-						button
-							padding 2vh
-							font-size 1em
+				bottom 7px
+	header.sticky .navbar
+		left calc( (100vw - 345px) / 2)
+		width 345px
 
 			
 @media only screen and (min-width 520px)
-	pageHeight = calc(100vh - 150px)
+	pageHeight = calc(100vh - 200px)
 	.page
 		height pageHeight
 	header
@@ -126,21 +160,22 @@ header.sticky
 			width: 490px
 			.headlines
 				h1
-					font-size 3.2em
+					font-size 4em
 					margin -10px 0px 15px 0px
 				h2
-					font-size:1.7em
+					font-size:2em
 					margin: 10px 0px 5px 0px
-				p
-					font-size 1.2em
+			p
+				font-size 1.8em
 			.navbar ul li button
-				font-size 1.2em
+				font-size 1.5em
 	header.sticky
 		h1#stickyTitle
-			font-size:4em;
-		.container .navbar ul li button
-			padding:10px
-			font-size 0.9em							
+			bottom:80px
+			font-size 4em
+		.navbar
+			left calc( (100vw - 490px) / 2)
+			width 490px						
 
 @media only screen and (min-width 770px)
 	header
@@ -155,10 +190,13 @@ header.sticky
 				h2
 					font-size:1.7em
 					margin: 10px 0px 5px 0px
-				p
-					font-size 1.2em
+			p
+				font-size 1.9em
 			.navbar ul li button
 				font-size 1.3em
+	header.sticky .navbar
+		left calc( (100vw - 740px) / 2)
+		width 740px
 
 
 
@@ -192,13 +230,18 @@ header.sticky
 					font-size 1em
 	header.sticky
 		h1#stickyTitle
+			bottom: 30px
 			font-size 2em
-		.container .navbar ul li button
-			font-size 0.7em	
+		.navbar
+			left calc( (100vw - 450px) / 2)
+			width 450px
+			ul li button
+				font-size 0.7em	
+				
 
 
 	@media only screen and (min-width 650px)
-		pageHeight = calc(100vh - 150px)
+		pageHeight = calc(100vh - 160px)
 		.page
 			height pageHeight
 		header .container

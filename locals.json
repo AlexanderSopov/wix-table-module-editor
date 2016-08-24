@@ -29,13 +29,31 @@
 		"title":"Experience",
 		"template":"",
 		"content":  [{
-			"h1":"Front-End",
-			"h2": "Building User Interfaces",
-			"p": ["There's a special pleasure in building interfaces.","It's visual, it's wonderful to see people react to it and building it is wonderful."]
+			"h1":"Jr Fullstack Engineer",
+			"h2": "BobbyHouston Media",
+			"p": [
+				"I started at BobbyHouston at June, 2016 and kept on for the entirety of the summer.",
+				"As it was my first real programming job, the experience was intense and I built so many services and websites that I find it hard to even remember how I managed it."
+			],
+			"a": "dunno"
 		},{
-			"h1":"Back-End",
-			"h2": "Orchestrating the Opera",
-			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
+			"h1":"CEO & Software Engineer",
+			"h2": "TeddyBear Studio",
+			"p": [
+				"TeddyBear Studio is building a Static Site Generator (SSG) and a Content Management System (CMS) service wrapped around it",
+				"In short, it's a combination between Wordpress and Wix.",
+				"Except, of course, with the beneficial speed of a static site."
+			],
+			"a":"dunno"
+		},{
+			"h1":"Freelancer",
+			"h2": "Alexander Sopov",
+			"p": [
+				"I write, I code, I talk.",
+				"Do you need an article? Maybe a talk from a comedian or perhaps what you need is a motivational speaker?",
+				"In any case I view myself as a multi-talented Software Engineer and freelancing gives me the opportunity to hone into that."
+			],
+			"a":"dunno"
 		}]
 	},{
 		"title":"Contact",
