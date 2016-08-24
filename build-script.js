@@ -1,27 +1,17 @@
 "use strict";
-var pug 	= require('pug'),
-	utils	= require('./lib/utils.js');
+var utils	= require('./lib/utils.js'),
+	html 	= {
+				locals: utils.getLocals(),
+				options:{
+					filename:"index.pug",
+					compileDebug:false,
+					pretty:true
+				},
+				path: "./templates/index.pug"
+			};
 
-// compile
-/*
-var fn = pug.compile('string of pug', options);
-var html = fn(locals);
-*/
+utils.build(html, "./static/css/style.styl");
 
-var locals = {
-	pageTitle: "My cock is delicious",
-	youAreUsingPug: true
-};
 
-var options = {
-	filename:"index.pug",
-	compileDebug:false,
-	pretty:true
-};
-// renderFile
-var html = (pug.compileFile("index.pug",options))(locals);
 
-console.log(html);
-
-utils.build(html);
 

@@ -4,7 +4,7 @@
   "description": "Personal Website and Portfolio of owner and ceo of TeddyBear Studio, Alexander Sopov",
   "main": "build-script.js",
   "scripts": {
-    "run": "node build-script.js",
+    "run": "nodemon build-script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/AlexanderSopov/personal-website/issues"
   },
-  "homepage": "https://github.com/AlexanderSopov/personal-website#readme"
+  "homepage": "https://github.com/AlexanderSopov/personal-website#readme",
+  "dependencies": {
+    "pug": "^0.1.0",
+    "stylus": "^0.54.5"
+  }
 }

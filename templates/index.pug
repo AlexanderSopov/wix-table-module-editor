@@ -1,24 +1,39 @@
 doctype html
 html(lang="en")
   head
-    title= pageTitle
-    script(type='text/javascript').
-      if (foo) bar(1 + 5)
+    title= "Alexander Sopov - " + pages[0].title
     meta(charset="utf-8")
     meta(name="description", content="TeddyBear Studio")
     meta(name="author", content="Alexander Sopov")
     meta(name="viewport", content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no")
     link(rel="stylesheet", href="css/style.css")
-    link(rel="stylesheet", href="css/fonts.css")
-    script(src="js/script.js")
     script(src="https://code.jquery.com/jquery-1.12.4.min.js")
-
+    script(src="js/script.js")
+    script(src="https://use.typekit.net/dql6fkf.js")
   body
-    h1 Pug - I love that I love you
-    #container.col
-      if youAreUsingPug
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        This is such a beautiful day to be alive! I cannot believe it. I. Just. Can't. Friggin believe it!
+    header(class="tk-bebas-neue")
+      img(class="header-img", src="img/headerImg.jpg")
+      h1=heading
+      h2=subheading
+      p(class="tk-source-sans-pro")
+        i=slogan
+      .navbar
+        ul
+          - for (var i=0; i<pages.length;i++)
+            - var title = pages[i].title, url = "#"+title;
+            li(class="tk-source-sans-pro")
+              button(onclick="script.openPage(this)") #{title}
+    - for(var i=0; i<pages.length;i++)
+      - var page = pages[i];
+        if page.content
+          div(id=page.title, class=i==0 ? 'page active' : 'page')
+            - for(var j=0; j<page.content.length;j++)
+              - var content = page.content[j];
+              div(id=content.h1, class=j==0 ? 'content active' : 'content')
+                h1(class="tk-bebas-neue") #{content.h1}
+                h2(class="tk-bebas-neue") #{content.h2}
+                - for(var k=0; k<content.p.length;k++)
+                  - var p = content.p[k];
+                    p(class="tk-source-sans-pro") #{p}
+
+      
