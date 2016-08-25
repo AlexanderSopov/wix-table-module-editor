@@ -12,14 +12,12 @@ html(lang="en")
     script(src="js/script.js")
   body
     header
-      div#logo
-        h3=logo
-        div#navbar.container
-          ul
-            - for (var i=0; i<pages.length;i++)
-              - var title = pages[i].title, url = "#"+title;
-              li
-                button(onclick="script.openPage(this)") #{title}
+      div(id="logo" onclick="script.openPage(this)")
+        h3=logo+"."
+      div#navbar
+        - for (var i=0; i<pages.length;i++)
+          - var title = pages[i].title, url = "#"+title;
+          button(onclick="script.openPage(this)") #{title}
     .header-img
       img(src="img/headerImg.jpg")
     .container
@@ -27,18 +25,27 @@ html(lang="en")
         - var page = pages[i];
           div(id=page.title, class=i==0 ? 'page active' : 'page')
             .title
-              h1=page.title
+              h1=page.title+"."
             hr
-            - for(var j=0; j<page.content.length;j++)
-              - var content = page.content[j];
-              div(id=content.h1, class=j==0 ? 'content .active' : 'content')
-                h2=content.h1
-                h3=content.h2
-                - for(var k=0; k<content.p.length;k++)
-                  - var p = content.p[k];
-                    p=p
+            .ingress
+              p=page.ingress
+            .content-wrap
+              - for(var j=0; j<page.content.length;j++)
+                - var content = page.content[j];
+                div(id=content.h1, class=(j%2)==0 ? 'content left' : 'content')
+                  h2=content.h1
+                  h3=content.h2
+                  - for(var k=0; k<content.p.length;k++)
+                    - var p = content.p[k];
+                      p=p
     div#footer
       .logo
         h3=logo
+      .email
+        h3=contact.email
+      .github
+        h3=contact.github
+      .copyright
+        h3=copyright
 
       

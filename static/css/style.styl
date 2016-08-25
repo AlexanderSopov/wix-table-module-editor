@@ -1,32 +1,39 @@
 width = 70%
 headerHeight = 70px
 *
-	transition: all 2s ease;
 	/*border 1px solid black*/
 body
 	margin 0px
 	padding 0px
 	height:100%
-	background: rgba(255,255,255,1);
+	background-color whites
+	/*background: rgba(255,255,255,1);
 	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(38%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
 	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
 	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
 	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
-	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);*/
 h1
 	font-size 3.2em
+	font-family 'Palatino Linotype'
 h2
+	font-family 'Palatino Linotype'
 	font-size 2em
 h3
+	font-family 'Palatino Linotype'
 	font-size 1.5em
 p
-	font-size 1.3em
+	font-family 'Josefin Sans', sans-serif
+	font-weight 400
+	font-size 1.4em
 .container
 	width width
 	margin-left auto
 	margin-right auto
 header
+	display flex
+	flew-wrap wrap
 	z-index 1
 	background: rgba(255,255,255,1);
 	width:100%
@@ -34,37 +41,70 @@ header
 	top:0px
 	height headerHeight
 	#logo
-		font-family 'Gentium Basic', serif
-		padding 0px 0px 0px 20px
-		text-align left
+		cursor pointer
 		display block
+		h3
+			margin 0px
+			padding 20px
+	#navbar
+		margin 0px
+		padding:20px
+		button
+			border 0px
+			background-color inherit
+			font-family 'Josefin Sans', sans-serif
+			margin-left 5px
+			margin-right 5px
+			font-size 1.3em
+			cursor pointer
 .header-img
 	margin-top headerHeight
+	margin-bottom 100px
 	width 100%
 	img
 		width 100%
-#navbar, .content:nth-child(1), .page
-	display none
+	
 .page
 	text-align center
-	font-family 'Josefin Sans', sans-serif
-	font-weight 300
-.active
-	display block
+	margin-bottom:100px
 .title
 	margin-top 80px
-	font-family 'Gentium Basic', serif
 	h1
-		margin 0px
+		margin 20px
 .content
-	margin-top 50px
+	margin-top 0px
 #footer
 	padding 50px
 	text-align center
-	font-family 'Gentium Basic', serif
 	color #fff
 	background-color #1a1b20
 	height 200px
 	margin 50px 0px 0px 0px
+
+@media only screen and (min-width 769px)
+	.container
+		width 750px
+		.page .content-wrap
+			display flex
+			flex-wrap wrap
+			.content
+				padding: 25px
+				width calc(50% - 50px)
+				text-align left
+			.left
+				text-align right
+	header #logo
+		padding-left 0px
+		text-align right
+		width: 200px
+	.ingress p
+		font-size 2em
 	
-@media screen and 
+/*@media only screen and (orientation: landscape)
+	@media only screen and (min-width 650px)
+		#footer
+			width 100px*/
+			
+#footer h3
+	font-weight 300
+	font-family 'Josefin Sans', sans-serif

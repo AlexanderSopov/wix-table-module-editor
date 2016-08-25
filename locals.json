@@ -1,30 +1,28 @@
 {
 	"pages":[{
-		"title":"Merits.",
+		"title":"Merits",
+		"ingress":"At the end of the day, what you wan't to know is what can I do? Well, seek no further. Below follows my merits and capabalities.",
 		"template":"",
 		"content": [{
 			"h1":"Front-End",
 			"h2": "Building User Interfaces",
-			"p": ["There's a special pleasure in building interfaces.","It's visual, it's wonderful to see people react to it and building it is wonderful."]
+			"p": [
+				"Interfaces are viewed as controls to a computer program.",
+				"It's an accurate picture, of course, but the way I view it is different.",
+				"Software is not a monitor, mouse and a keyboard. It's a biological artifact, and the interface is the plug to our brain"
+			]
 		},{
 			"h1":"Back-End",
-			"h2": "Orchestrating the Opera",
-			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
+			"h2": "Orchestrating The Opera",
+			"p": [
+				"Building Back-End services is a lot like orchestrating an Opera.",
+				"The pleasure is not in seeing people react to the things on stage.",
+				"Instead, the pleasure is found in knowing that everything works because you got it to work, and the less you hear about it, the better do you know you did."
+			]
 		}]
 	},{
-		"title":"Cases.",
-		"template":"",
-		"content":  [{
-			"h1":"Front-End",
-			"h2": "Building User Interfaces",
-			"p": ["There's a special pleasure in building interfaces.","It's visual, it's wonderful to see people react to it and building it is wonderful."]
-		},{
-			"h1":"Back-End",
-			"h2": "Orchestrating the Opera",
-			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
-		}]
-	},{
-		"title":"Experience.",
+		"title":"Experience",
+		"ingress":"In a minimal amount of time, I've gathered experience from a broad range of areas and grown throughout each challenge. Each month I look at my old code and marvel at how much I've learned.",
 		"template":"",
 		"content":  [{
 			"h1":"Jr Fullstack Engineer",
@@ -35,7 +33,7 @@
 			],
 			"a": "dunno"
 		},{
-			"h1":"CEO & Software Engineer",
+			"h1":"Software Engineer",
 			"h2": "TeddyBear Studio",
 			"p": [
 				"TeddyBear Studio is building a Static Site Generator (SSG) and a Content Management System (CMS) service wrapped around it",
@@ -52,19 +50,43 @@
 				"In any case I view myself as a multi-talented Software Engineer and freelancing gives me the opportunity to hone into that."
 			],
 			"a":"dunno"
+		},{
+			"h1":"The Future",
+			"h2": "Working Towards Greatness",
+			"p": [
+				"I love technology.",
+				"I'd love to say 'I'm commited to this', but the truth is that it all derives from my curiosity and interest.",
+				"On top of that, I'm the type of guy who is able to pour down his soul on his work and obsessions.",
+				"If you're in need of an Engineer, take your shot and contact me ASAP. It will be too late."
+			],
+			"a":"dunno"
 		}]
 	},{
-		"title":"Contact.",
+		"title":"Contact",
+		"ingress":"Ready to take a step further in our relationship? Come on, now, don't be shy - we're a happy bunch and we'd love to hear from you! Pick your favorite channel from below and see you soon.",
 		"template":"",
 		"content": [{
-			"h1":"Front-End",
-			"h2": "Building User Interfaces",
-			"p": ["There's a special pleasure in building interfaces.","It's visual, it's wonderful to see people react to it and building it is wonderful."]
+			"h1":"Adress",
+			"h2": "Alexander Sopov",
+			"p": [
+				"Virvelvindsgatan 8, 417 02",
+				"Gothenburg, Sweden",
+				"+46 (0)707 589 600"
+			]
 		},{
-			"h1":"Back-End",
-			"h2": "Orchestrating the Opera",
-			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
+			"h1":"E-Mail",
+			"h2": "sopovalexander[at]gmail.com",
+			"p": [
+				"Github profile:",
+				"https://www.github.com/AlexanderSopov",
+				"[facebook], [instagram], [twitter]"
+			]				
 		}]
 	}],
-	"logo":"Alexander."
+	"logo":"Alexander",
+	"copyright": "copyright 2016",
+	"contact":{
+		"email": "sopovalexander[at]gmail.com",
+		"github": "https://github.com/AlexanderSopov"
+	}
 }
