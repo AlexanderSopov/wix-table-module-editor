@@ -1,4 +1,5 @@
 width = 70%
+margin = 15%
 headerHeight = 70px
 *
 	/*border 1px solid black*/
@@ -6,7 +7,7 @@ body
 	margin 0px
 	padding 0px
 	height:100%
-	background-color whites
+	background-color white
 	/*background: rgba(255,255,255,1);
 	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(38%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
@@ -15,22 +16,31 @@ body
 	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
 	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);*/
 h1
-	font-size 3.2em
+	font-size 2.9em
 	font-family 'Palatino Linotype'
 h2
 	font-family 'Palatino Linotype'
-	font-size 2em
+	font-size 1.8em
 h3
 	font-family 'Palatino Linotype'
-	font-size 1.5em
+	font-size 1.3em
 p
 	font-family 'Josefin Sans', sans-serif
 	font-weight 400
-	font-size 1.4em
+	font-size 1.2em
+
+#footer .container div h3
+	font-size 1.2em
+#body
+	padding-top 90px
+	background-color white
+	width 100%
+	position relative
+	top 100px
 .container
 	width width
-	margin-left auto
-	margin-right auto
+	margin-left margin
+	margin-right margin
 header
 	display flex
 	flew-wrap wrap
@@ -57,9 +67,10 @@ header
 			margin-right 5px
 			font-size 1.3em
 			cursor pointer
-.header-img
-	margin-top headerHeight
-	margin-bottom 100px
+#header-img
+	position: fixed
+	top headerHeight
+	z-index:-99
 	width 100%
 	img
 		width 100%
@@ -74,14 +85,28 @@ header
 .content
 	margin-top 0px
 #footer
-	padding 50px
-	text-align center
+	padding 20px
+	text-align left
 	color #fff
 	background-color #1a1b20
-	height 200px
+	min-height 200px
 	margin 50px 0px 0px 0px
+	h3
+		font-weight 300
+		font-family 'Josefin Sans', sans-serif
+@media only screen and (min-width 375px)
+	h1
+		font-size 3.2em
+	h2
+		font-size 2em
+	h3
+		font-size 1.5em
+	p
+		font-size 1.4em
 
 @media only screen and (min-width 769px)
+	h1
+		font-size 3.5em
 	.container
 		width 750px
 		.page .content-wrap
@@ -99,12 +124,8 @@ header
 		width: 200px
 	.ingress p
 		font-size 2em
-	
-/*@media only screen and (orientation: landscape)
-	@media only screen and (min-width 650px)
-		#footer
-			width 100px*/
-			
-#footer h3
-	font-weight 300
-	font-family 'Josefin Sans', sans-serif
+
+
+@media only screen and (orientation: landscape)
+	#body
+		padding-top 50px

@@ -19,24 +19,48 @@ window.script = (function(){
 })();
 
 $(document).ready(function(){
-	var header 	= $('header'),
-		page	= document.querySelectorAll(".page");
-/*	$(window).scroll(function() {
+	var header 		= $('header'),
+		page		= document.querySelectorAll(".page"),
+		body		= $("#body"),
+		headerImg	= $("#header-img"),
+		hdHeight 	= header.height(),
+		hdImgHeight	= headerImg.height(),
+		snapable	= true,
+		bodyTop		= body.offset().top,
+		scroller	= $("html, body");
+
+
+	//Set the content-body underneath headerImg
+	body.css("top", (hdHeight + hdImgHeight) );
+	$(document).scrollStop(function() {
 		var that = $(this);
-		for (var i=0;i<page.length;i++){
-			var elt 		= $(page[i]),
-				whereAt 	= that.scrollBottom(),
-				eltAt 		= elt.offset().top;
-			if (whereAt > eltAt && whereAt-eltAt < 300){
-				elt.hide();
-				return elt.fadeIn(30);
+		var whereWeAt 		= that.scrollTop(),
+			snapTreshold	= 60;
+
+		if (whereWeAt < hdImgHeight-snapTreshold){
+			snapable = true;
+		}else if (whereWeAt > hdImgHeight+snapTreshold){
+			snapable = true;
+		}else{
+			if (snapable){
+				scroller.animate({scrollTop: (hdImgHeight+5) }, 10);
+				snapable = false;
 			}
 		}
-	});*/
+	});
+
 });
+
 
 $.fn.scrollBottom = function() { 
   return $(document).height() - this.scrollTop() - this.height(); 
+};
+$.fn.scrollStop = function(callback) {
+  var that = this, $this = $(that);
+  $this.scroll(function(ev) {
+    clearTimeout($this.data('scrollTimeout'));
+    $this.data('scrollTimeout', setTimeout(callback.bind(that), 250, ev));
+  });
 };
 //,{
 //		"title":"Cases",

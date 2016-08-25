@@ -21,11 +21,11 @@
 			]
 		}]
 	},{
-		"title":"Experience",
+		"title":"Xp",
 		"ingress":"In a minimal amount of time, I've gathered experience from a broad range of areas and grown throughout each challenge. Each month I look at my old code and marvel at how much I've learned.",
 		"template":"",
 		"content":  [{
-			"h1":"Jr Fullstack Engineer",
+			"h1":"Jr. Fullstack Engineer",
 			"h2": "BobbyHouston Media",
 			"p": [
 				"I started at BobbyHouston at June, 2016 and kept on for the entirety of the summer.",
@@ -75,10 +75,10 @@
 			]
 		},{
 			"h1":"E-Mail",
-			"h2": "sopovalexander[at]gmail.com",
+			"h2": "sopovalexander [at] gmail.com",
 			"p": [
 				"Github profile:",
-				"https://www.github.com/AlexanderSopov",
+				"github.com/AlexanderSopov",
 				"[facebook], [instagram], [twitter]"
 			]				
 		}]
@@ -87,6 +87,6 @@
 	"copyright": "copyright 2016",
 	"contact":{
 		"email": "sopovalexander[at]gmail.com",
-		"github": "https://github.com/AlexanderSopov"
+		"github": "github.com/AlexanderSopov"
 	}
 }
