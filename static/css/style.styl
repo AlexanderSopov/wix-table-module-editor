@@ -1,299 +1,70 @@
-pageHeight = calc(100vh - 150px)
-fullscreenHeader = 100vh
-
-@font-face 
-	font-family: archive
-	src: url(archive-font/Archive.otf) /* Safari, Android, iOS */
+width = 70%
+headerHeight = 70px
 *
+	transition: all 2s ease;
+	/*border 1px solid black*/
+body
 	margin 0px
 	padding 0px
-body
-	background:
-	radial-gradient(circle farthest-side at 0% 50%,#fb1 23.5%,rgba(240,166,17,0) 0)21px 30px,
-	radial-gradient(circle farthest-side at 0% 50%,#B71 24%,rgba(240,166,17,0) 0)19px 30px,
-	linear-gradient(#fb1 14%,rgba(240,166,17,0) 0, rgba(240,166,17,0) 85%,#fb1 0)0 0,
-	linear-gradient(150deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
-	linear-gradient(30deg,#fb1 24%,#B71 0,#B71 26%,rgba(240,166,17,0) 0,rgba(240,166,17,0) 74%,#B71 0,#B71 76%,#fb1 0)0 0,
-	linear-gradient(90deg,#B71 2%,#fb1 0,#fb1 98%,#B71 0%)0 0 #fb1;
-	background-size:40px 60px;
+	height:100%
+	background: rgba(255,255,255,1);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(38%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 38%, rgba(237,237,237,1) 100%);
+h1
+	font-size 3.2em
+h2
+	font-size 2em
+h3
+	font-size 1.5em
+p
+	font-size 1.3em
 .container
-	padding-top:calc( (100vh - 450px) / 2)
+	width width
 	margin-left auto
 	margin-right auto
-	width 290px
-	height 450px
-	display flex
-	flex-wrap wrap
 header
-	position relative
-	background-color rgba(192,178,131,0.9)
-	height fullscreenHeader
+	z-index 1
+	background: rgba(255,255,255,1);
+	width:100%
+	position fixed
+	top:0px
+	height headerHeight
+	#logo
+		font-family 'Gentium Basic', serif
+		padding 0px 0px 0px 20px
+		text-align left
+		display block
+.header-img
+	margin-top headerHeight
 	width 100%
-	color #373737
-	.container
-		text-align center
-		.header-img
-			width 100%
-			height auto
-			img
-				width 100%
-		.headlines
-			width 100%
-			h1
-				font-size 2.5em
-				margin 3vh 0px 2vh 0px
-			h2
-				font-size:1.3em
-				margin: 2vh 0px 2vh 0px
-		p
-			display block
-			width:100%
-			font-size 1em
-		.navbar
-			width:100%
-			ul
-				list-style-type none
-				margin-left auto
-				margin-right auto
-				li
-					display inline
-					button
-						color #373737
-						background-color inherit
-						border 0px
-						padding 2vh 2vh 0vh 2vh
-						font-size 1em
-header.sticky
-	h1#stickyTitle
-		text-align center
-		width:100%
-		position absolute
-		bottom: 70px
-		font-size: 2em;
-		transition all 1s ease
-	.navbar
-		position absolute
-		bottom 2px
-		left calc( (100vw - 290px) / 2)
-		width 290px
-		transition all 1s ease
-		ul
-			li
-				button
-					padding 5px 15px 5px 15px
-					transition all 1s ease
-.pattern
-	position absolute
-	top 0px
-	left 0px
-	z-index:-99
-	width 100%
-	height 100%
-	background:
-	linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
-	linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
-	background-color:#708090;
-	background-size: 64px 128px
-	/*background-color: gray;
-	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
-	*//*background:
-	linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-	linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-	linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-	linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-	linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-	linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-	background-color: #131313;
-	background-size: 20px 20px;
-	*/
-	
+	img
+		width 100%
+#navbar, .content:nth-child(1), .page
+	display none
 .page
-	position relative
-	height pageHeight
-	color #494141
-	padding: 15px
-.page, .content, #stickyTitle
-	display:none
+	text-align center
+	font-family 'Josefin Sans', sans-serif
+	font-weight 300
 .active
-	display:block
-#Skills
-	background-color rgba(244, 244, 244,0.9)
-#Projects
-	background-color rgba(220, 208, 192,0.9)
-#Experience
-	background-color rgba(237, 217, 192,0.9)
-#Contact
-	background-color rgba(255, 255, 255,0.9)
-.tk-bebas-neue
-	letter-spacing 3px
-
-@media only screen and (min-width 375px)
-	header
-		.container
-			padding-top:calc( (100vh - 637px) / 2)
-			height 637px
-			width 345px
-			.headlines
-				h1
-					font-size 3em
-					margin -10px 0px 15px 0px
-				h2
-					font-size:1.5em
-					margin: 10px 0px 5px 0px
-			p
-				font-size 1.5em
-			.navbar
-				bottom 7px
-	header.sticky .navbar
-		left calc( (100vw - 345px) / 2)
-		width 345px
-
-			
-@media only screen and (min-width 520px)
-	pageHeight = calc(100vh - 200px)
-	.page
-		height pageHeight
-	header
-		.container
-			padding-top:calc( (100vh - 800px) / 2)
-			height 800px
-			width: 490px
-			.headlines
-				h1
-					font-size 4em
-					margin -10px 0px 15px 0px
-				h2
-					font-size:2em
-					margin: 10px 0px 5px 0px
-			p
-				font-size 1.8em
-			.navbar ul li button
-				font-size 1.5em
-	header.sticky
-		h1#stickyTitle
-			bottom:80px
-			font-size 4em
-		.navbar
-			left calc( (100vw - 490px) / 2)
-			width 490px						
-
-@media only screen and (min-width 770px)
-	header
-		.container
-			padding-top:calc( (100vh - 1000px) / 2)
-			height 1000px
-			width: 740px
-			.headlines
-				h1
-					font-size 3.2em
-					margin -10px 0px 15px 0px
-				h2
-					font-size:1.7em
-					margin: 10px 0px 5px 0px
-			p
-				font-size 1.9em
-			.navbar ul li button
-				font-size 1.3em
-	header.sticky .navbar
-		left calc( (100vw - 740px) / 2)
-		width 740px
-
-
-
-
-@media only screen and (orientation: landscape)
-	pageHeight = calc(100vh - 110px)
-	.page
-		height pageHeight
-	header
-		.container
-			width 450px
-			height 280px
-			padding-top:calc( (100vh - 280px) / 2)
-			.header-img
-				width calc(45% - 15px)
-			.headlines
-				text-align left
-				width 55%
-				margin-left:15px
-				h1
-					margin-top 0px
-					padding-bottom 10px
-					font-size 2.5em
-				h2
-					font-size 1.5em
-			p
-				font-size 1.5em
-			.navbar
-				width: 100%
-				ul li button
-					font-size 1em
-	header.sticky
-		h1#stickyTitle
-			bottom: 30px
-			font-size 2em
-		.navbar
-			left calc( (100vw - 450px) / 2)
-			width 450px
-			ul li button
-				font-size 0.7em	
-				
-
-
-	@media only screen and (min-width 650px)
-		pageHeight = calc(100vh - 160px)
-		.page
-			height pageHeight
-		header .container
-			width 620px
-			height 345px
-			padding-top:calc( (100vh - 345px) / 2)
-			.headlines
-				h1
-					font-size 3.4em
-				h2
-					font-size 2.2em
-			p
-				font-size 1.8em
-				margin: 15px 0 15px 0px
-		header.sticky
-			h1#stickyTitle
-				font-size 4em;
-				bottom 50px
-			.container .navbar ul li button
-				padding 10px
-				font-size 1em	
-
-	@media only screen and (min-width 768px)
-		header .container
-			width 738px
-			height 400px
-			padding-top:calc( (100vh - 400px) / 2)
-			.headlines
-				h1
-					font-size 4em
-				h2
-					font-size 2.6em
-			p
-				font-size 2em
-				margin: 30px 0 30px 0px
-
-	@media only screen and (min-width 1024px)
-		header .container
-			width 850px
-			height 600px
-			padding-top:calc( (100vh - 600px) / 2)
-			.header-img
-				width calc(50% - 15px)
-			.headlines
-				width 50%
-			.headlines
-				h1
-					font-size 4.3em
-				h2
-					font-size 2.8em
-			p
-				font-size 2.3em
-				margin: 50px 0 40px 0px
-			.navbar ul li button
-				font-size 1.4em
+	display block
+.title
+	margin-top 80px
+	font-family 'Gentium Basic', serif
+	h1
+		margin 0px
+.content
+	margin-top 50px
+#footer
+	padding 50px
+	text-align center
+	font-family 'Gentium Basic', serif
+	color #fff
+	background-color #1a1b20
+	height 200px
+	margin 50px 0px 0px 0px
+	
+@media screen and 

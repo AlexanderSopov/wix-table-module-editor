@@ -1,8 +1,6 @@
 {
 	"pages":[{
-		"title":"Home"
-	},{
-		"title":"Skills",
+		"title":"Merits.",
 		"template":"",
 		"content": [{
 			"h1":"Front-End",
@@ -14,7 +12,7 @@
 			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
 		}]
 	},{
-		"title":"Projects",
+		"title":"Cases.",
 		"template":"",
 		"content":  [{
 			"h1":"Front-End",
@@ -26,7 +24,7 @@
 			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
 		}]
 	},{
-		"title":"Experience",
+		"title":"Experience.",
 		"template":"",
 		"content":  [{
 			"h1":"Jr Fullstack Engineer",
@@ -56,7 +54,7 @@
 			"a":"dunno"
 		}]
 	},{
-		"title":"Contact",
+		"title":"Contact.",
 		"template":"",
 		"content": [{
 			"h1":"Front-End",
@@ -68,7 +66,5 @@
 			"p": ["Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
 		}]
 	}],
-	"heading":"Alexander Sopov",
-	"subheading":"Jr. Fullstack Engineer",
-	"slogan":"Freelancer with small promises and large deliveries"
+	"logo":"Alexander."
 }
