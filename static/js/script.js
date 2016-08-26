@@ -34,20 +34,25 @@ window.script = (function(){
 
 		body.css("top", (hdHeight + hdImgHeight) );
 	}
-
 	var nav = (function(){
 		var isOpen,
 			active,
-			navbar;
+			navbar,
+			pages;
 		function init(){
 			isOpen 		= false;
 			active 		= $("#navbar ul .active"),
-			navbar		= $("#navbar");
+			navbar		= $("#navbar"),
+			pages		= [];
 			$("#navbar ul li").each(function(i,e){
-				$(e).hover(setActive, setInactive);
+				$(e).hover(hoverActive, hoverInactive);
+			});
+			$(".pages").each(function(i,e){
+				pages.push($(e));
 			});
 			headerImg.on("click", shut);
 			body.on("click", shut);
+			$(window).scroll(setActive);
 		}
 		function toggle(){
 			if(isOpen)
@@ -67,7 +72,7 @@ window.script = (function(){
 		//Private Methods
 		function open(){
 			if(!isOpen){
-				header.css("height", hdHeight*3 + "px");
+				header.css("height", hdHeight*pages.length + "px");
 				isOpen = true;
 			}
 		}
@@ -77,13 +82,24 @@ window.script = (function(){
 				isOpen = false;			
 			}
 		}
-		function setActive(){
+		function hoverActive(){
 			$(this).toggleClass("active");
 			active.toggleClass("active");
 		}
-		function setInactive(){
+		function hoverInactive(){
 			$(this).toggleClass("active");
 			active.toggleClass("active");
+		}
+		function setActive(){
+			for (var i = pages.length-1; i>= 0; i--){
+				if (utils.isPassed(pages[i]))
+					return activate(pages[i]);
+			}
+		}
+		function activate($elt){
+			$elt.toggleClass(".active");
+			active.toggleClass(".active");
+			active = $elt;
 		}
 		return {
 			toggle:toggle,
@@ -101,7 +117,7 @@ window.script = (function(){
 			}, 100);
 		}
 		function snapToHeader() {
-			var that	 	= $(this),
+			var that	 		= $(this),
 				whereWeAt 		= that.scrollTop(),
 				snapTreshold	= 60;
 
@@ -116,9 +132,15 @@ window.script = (function(){
 				}
 			}
 		}
+		function isPassed($elt){
+			if ($(document).scrollTop() > $elt.offset().top)
+				return true;
+			return false;
+		}
 		return {
 			init:init,
-			scrollTo:scrollTo
+			scrollTo:scrollTo,
+			isPassed:isPassed
 		}
 	})();
 	var jQPlugins = (function(){
