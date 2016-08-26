@@ -104,7 +104,6 @@ window.script = (function(){
 			headerImg.on("click", help.shrink);
 			body.on("click", help.shrink);
 			$(window).scroll(scrollHandler);
-			animateRuler(0,0);
 		}
 		function toggle(){
 			if(isExpanded)
@@ -255,7 +254,7 @@ window.script = (function(){
 		}
 		function scrollTo(elt){
 			setTimeout(function(){
-				$("html, body").animate({scrollTop: (elt.offset().top - 100) }, 3000);
+				$("html, body").animate({scrollTop: (elt.offset().top - 100) }, 1000);
 			}, 100);
 		}
 		function snapToHeader() {
