@@ -11,14 +11,16 @@ html(lang="en")
     script(src="https://code.jquery.com/jquery-2.2.4.min.js")
     script(src="js/script.js")
   body
-    header
-      div(id="logo" onclick="script.openPage(this)")
+    header.stickyHD
+      div#logo(onclick="script.nav.goTo(this)")
         h3=logo+"."
-      div#navbar
-        - for (var i=0; i<pages.length;i++)
-          - var title = pages[i].title, url = "#"+title;
-          button(onclick="script.openPage(this)") #{title}
-    #header-img
+      div#navbar(onclick="script.nav.toggle()")
+        ul
+          - for (var i=0; i<pages.length;i++)
+            - var title = pages[i].title, url = "#"+title;
+            li(onclick="script.nav.goTo(this)" class=i==0 ? "active" : "")
+              h3= title+"."
+    div#header-img
       img(src="img/headerImg.jpg")
     div#body
       .container
