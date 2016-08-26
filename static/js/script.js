@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	setTimeout(function() {script.init();},50);
+	setTimeout(function() {script.init();},150);
 	testOp();
 });
 function testOp(){
@@ -89,7 +89,7 @@ window.script = (function(){
 			tresholds	= [];
 			offset		= 0,
 			winHeight	= $(window).height();
-			var startAt = 0;
+			var startAt = hdHeight+hdImgHeight;
 			$("#navbar ul li").each(function(i,e){
 				$(e).hover(help.hoverActive, help.hoverInactive);
 			});
@@ -104,6 +104,7 @@ window.script = (function(){
 			headerImg.on("click", help.shrink);
 			body.on("click", help.shrink);
 			$(window).scroll(scrollHandler);
+			animateNavbar(0,0);
 		}
 		function toggle(){
 			if(isExpanded)
@@ -156,7 +157,7 @@ window.script = (function(){
 		}
 		function animateNavbar(pos, i){
 			var tsh 	= tresholds[i],
-				offset	= 0.3 * tsh.height,
+				offset	= 0.45 * tsh.height,
 				relPos 	= pos - tsh.startAt;
 			if ((tsh.height-offset) < relPos)
 				moveNavbar(relPos-tsh.height+offset, offset, i);
@@ -165,8 +166,6 @@ window.script = (function(){
 		}
 
 		function moveNavbar(pos, offset, i){
-			if (i == (pages.length-1))
-				return;
 			var progress 	= pos / offset,
 				height 		= hdHeight*i + hdHeight*progress,
 				height 		= height * -1;
@@ -179,22 +178,22 @@ window.script = (function(){
 		}
 
 		var help = (function(){
+			var tmpNavOffset = 0;
 			function roundNav(i){
 				navbar.css("top", (hdHeight*i*-1) + "px")
 			}
 			function hoverActive(){
-				$(this).toggleClass("active");
-				activeLink.toggleClass("active");
+				$(this).toggleClass("hover");
 			}
 			function hoverInactive(){
-				$(this).toggleClass("active");
-				activeLink.toggleClass("active");
+				$(this).toggleClass("hover");
 			}
 
 			function expand(){
 				if(!isExpanded){
 					header.css("height", hdHeight*pages.length + "px");
-					navbar.css("top", offset);
+					tmpNavOffset = navbar.css("top");
+					navbar.css("top", "0px");
 					isExpanded = true;
 				}
 			}
@@ -202,7 +201,7 @@ window.script = (function(){
 				if(isExpanded){
 					header.css("height", hdHeight + "px");
 					offset = navbar.css("top");
-					navbar.css("top",0)
+					navbar.css("top",tmpNavOffset);
 					isExpanded = false;			
 				}
 			}
@@ -252,7 +251,7 @@ window.script = (function(){
 		}
 		function scrollTo(elt){
 			setTimeout(function(){
-				$("html, body").animate({scrollTop: (elt.offset().top - 100) }, 1000);
+				$("html, body").animate({scrollTop: (elt.offset().top - 100) }, 3000);
 			}, 100);
 		}
 		function snapToHeader() {
