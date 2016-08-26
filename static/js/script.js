@@ -97,7 +97,7 @@ window.script = (function(){
 				pages.push($(e));
 				tresholds.push({
 					startAt: startAt,
-					height: pages[i].offset().top
+					height: pages[i].height()
 				});
 				startAt += tresholds[i].height;
 			});
@@ -132,13 +132,13 @@ window.script = (function(){
 				lastTsh	= tresholds.length-1;
 			for (var i = lastTsh; i>= 0; i--)
 				if (passedTreshold(tresholds[i], weAreAt))
-					animate(weAreAt, i);
+					return animate(weAreAt, i);
 		}
 		function passedTreshold(tsh, pos){
 			if (pos > tsh.startAt)
 				return true;
 			return false;
-			var link = $("#"+$elt.attr("id")+"-nav");
+			//var link = $("#"+$elt.attr("id")+"-nav");
 		}
 		function animate(pos, i){
 			animateRuler(pos, i);
@@ -146,21 +146,42 @@ window.script = (function(){
 
 		}
 		function animateRuler(pos, i){
-			console.log(i);
 			var tsh 		= tresholds[i],
 				offset		= 5,
-				bottom 		= tsh.startAt + tsh.height,
 				relPos		= pos - tsh.startAt,
 				progress	= relPos / tsh.height;
 				pxl			= (hdHeight * i) + (hdHeight * progress),
 				pxl			= pxl - offset;
-			console.log(pxl, relPos, progress);
 			ruler.css("top", pxl + "px");
 		}
-		function animateNavbar(){
-
+		function animateNavbar(pos, i){
+			var tsh 	= tresholds[i],
+				offset	= 0.3 * tsh.height,
+				relPos 	= pos - tsh.startAt;
+			if ((tsh.height-offset) < relPos)
+				moveNavbar(relPos-tsh.height+offset, offset, i);
+			else
+				help.roundNav(i)
 		}
+
+		function moveNavbar(pos, offset, i){
+			if (i == (pages.length-1))
+				return;
+			var progress 	= pos / offset,
+				height 		= hdHeight*i + hdHeight*progress,
+				height 		= height * -1;
+			console.log(
+				"pos", pos,
+				"\noffset", offset,
+				"\ni",i,
+				"\nheight", height);
+			navbar.css("top", height +"px");
+		}
+
 		var help = (function(){
+			function roundNav(i){
+				navbar.css("top", (hdHeight*i*-1) + "px")
+			}
 			function hoverActive(){
 				$(this).toggleClass("active");
 				activeLink.toggleClass("active");
@@ -189,7 +210,8 @@ window.script = (function(){
 				shrink:shrink,
 				expand:expand,
 				hoverActive:hoverActive,
-				hoverInactive:hoverInactive
+				hoverInactive:hoverInactive,
+				roundNav:roundNav
 			};
 		})();
 		return {
