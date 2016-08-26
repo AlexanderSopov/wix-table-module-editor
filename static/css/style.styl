@@ -63,8 +63,7 @@ header
 		width calc(100% / 2.2)
 		text-align right
 		h3
-			margin 0px
-			padding 20px
+			padding-right 20px
 	#navbar
 		position relative
 		margin 0px
@@ -72,24 +71,26 @@ header
 		width calc(100% / 1.8)
 		height navHeight
 		transition: all animationTime ease;
+		hr 
+			position absolute
+			top -5px
+			left 0px
+			width 20%
 		ul
 			margin 0px
 			padding 0px
 			list-style-type none
 			li
+				border 1px solid black
 				width 100%
-				height 100%
+				margin-top auto
+				margin-bottom auto
 				h3
-					margin 0px
-					padding-top 23px
-					padding-bottom 20px
 					text-align left
 					font-family 'Josefin Sans', sans-serif
 					font-weight 300
 					font-size 1.4em
 					cursor pointer
-			.active h3
-				text-decoration underline
 			
 #header-img
 	position: fixed
@@ -161,10 +162,27 @@ header
 			width (100% / 1.5)
 
 @media only screen and (min-width 769px)
+	h1
+		font-size 4em
+	h2
+		font-size 3em
+	h3
+		font-size 2em
+	p
+		font-size 1.6em
+	header
+		height 100px
+		#logo
+			width (100% / 2.5)
+		#navbar
+			width (100% / 1.5)
+			ul li
+				height 100px
+				h3
+					font-size 2em
 	width = 750px
 	margin = calc( (100% - 750px) / 2 )
-	h1
-		font-size 3.5em
+
 	.container
 		width width
 		margin-left margin

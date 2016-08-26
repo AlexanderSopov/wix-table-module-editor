@@ -1,6 +1,22 @@
 $(document).ready(function(){
 	setTimeout(function() {script.init();},50);
+	testOp();
 });
+function testOp(){
+}
+
+/*
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!	 MAIN-M	 !!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
 window.script = (function(){
 	var activeClass,
 		header,
@@ -31,97 +47,183 @@ window.script = (function(){
 			jQPlugins.init();
 			utils.init();
 		})();
-		console.log(hdImgHeight);
 		body.css("top", (hdHeight + hdImgHeight) );
 	}
+
+
+
+
+
+
+
+
+
+/*
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!	 NAVBAR	 !!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+
+
 	var nav = (function(){
-		var isOpen,
-			active,
+		var isExpanded,
+			activeLink,
 			navbar,
 			pages,
-			offset;
+			ruler,
+			offset,
+			winHeight;
 		function init(){
-			isOpen 		= false;
-			active 		= $("#navbar ul .active"),
-			navbar		= $("#navbar"),
-			pages		= [],
-			offset		= 0;
+			isExpanded 	= false;
+			navbar		= $("#navbar");
+			ruler 		= navbar.find("hr");
+			activeLink 	= navbar.find("ul .active");
+			pages		= [];
+			tresholds	= [];
+			offset		= 0,
+			winHeight	= $(window).height();
+			var startAt = 0;
 			$("#navbar ul li").each(function(i,e){
-				$(e).hover(hoverActive, hoverInactive);
+				$(e).hover(help.hoverActive, help.hoverInactive);
 			});
 			$(".page").each(function(i,e){
 				pages.push($(e));
+				tresholds.push({
+					startAt: startAt,
+					height: pages[i].offset().top
+				});
+				startAt += tresholds[i].height;
 			});
-			headerImg.on("click", shut);
-			body.on("click", shut);
-			$(window).scroll(setActive);
+			headerImg.on("click", help.shrink);
+			body.on("click", help.shrink);
+			$(window).scroll(scrollHandler);
 		}
 		function toggle(){
-			if(isOpen)
-				return shut();
-			open();
+			if(isExpanded)
+				return help.shrink();
+			help.expand();
 		}
 		function goTo(elt){
 			if (elt.id == "logo"){
 				utils.scrollTo($("body"))
-				if(isOpen)
-					shut();
-			}else if(isOpen){
+				if(isExpanded)
+					help.shrink();
+			}else if(isExpanded){
 				var je = $(elt);
 				var id ="#" + je.attr("data-value");
 				if(je.hasClass("active")){
 					je.toggleClass("active");
-					active.toggleClass("active");
+					activeLink.toggleClass("active");
 				}
 				utils.scrollTo($(id));
-				setTimeout(function(){shut();},100);
+				setTimeout(function(){help.shrink();},100);
 			}
 		}
 		//Private Methods
-		function open(){
-			if(!isOpen){
-				header.css("height", hdHeight*pages.length + "px");
-				navbar.css("top", offset);
-				isOpen = true;
+		function scrollHandler(){
+			var weAreAt = $(document).scrollTop(),
+				lastTsh	= tresholds.length-1;
+			for (var i = lastTsh; i>= 0; i--)
+				if (passedTreshold(tresholds[i], weAreAt))
+					animate(weAreAt, i);
+		}
+		function passedTreshold(tsh, pos){
+			if (pos > tsh.startAt)
+				return true;
+			return false;
+			var link = $("#"+$elt.attr("id")+"-nav");
+		}
+		function animate(pos, i){
+			animateRuler(pos, i);
+			animateNavbar(pos, i)
+
+		}
+		function animateRuler(pos, i){
+			console.log(i);
+			var tsh 		= tresholds[i],
+				offset		= 5,
+				bottom 		= tsh.startAt + tsh.height,
+				relPos		= pos - tsh.startAt,
+				progress	= relPos / tsh.height;
+				pxl			= (hdHeight * i) + (hdHeight * progress),
+				pxl			= pxl - offset;
+			console.log(pxl, relPos, progress);
+			ruler.css("top", pxl + "px");
+		}
+		function animateNavbar(){
+
+		}
+		var help = (function(){
+			function hoverActive(){
+				$(this).toggleClass("active");
+				activeLink.toggleClass("active");
 			}
-		}
-		function shut(){
-			if(isOpen){
-				header.css("height", hdHeight + "px");
-				offset = navbar.css("top");
-				navbar.css("top",0)
-				isOpen = false;			
+			function hoverInactive(){
+				$(this).toggleClass("active");
+				activeLink.toggleClass("active");
 			}
-		}
-		function hoverActive(){
-			$(this).toggleClass("active");
-			active.toggleClass("active");
-		}
-		function hoverInactive(){
-			$(this).toggleClass("active");
-			active.toggleClass("active");
-		}
-		function setActive(){
-			var weAreAt = $(document).scrollTop();
-			for (var i = pages.length-1; i>= 0; i--){
-				if (weAreAt > pages[i].offset().top - 170)
-					return activate(pages[i], i);
+
+			function expand(){
+				if(!isExpanded){
+					header.css("height", hdHeight*pages.length + "px");
+					navbar.css("top", offset);
+					isExpanded = true;
+				}
 			}
-		}
-		function activate($elt, i){
-			var newAct = $("#"+$elt.attr("id")+"-nav");
-			newAct.toggleClass("active");
-			active.toggleClass("active");
-			active = newAct;
-			navbar.css("top", hdHeight *-1*i);
-			offset = navbar("top");
-		}
+			function shrink(){
+				if(isExpanded){
+					header.css("height", hdHeight + "px");
+					offset = navbar.css("top");
+					navbar.css("top",0)
+					isExpanded = false;			
+				}
+			}
+			return {
+				shrink:shrink,
+				expand:expand,
+				hoverActive:hoverActive,
+				hoverInactive:hoverInactive
+			};
+		})();
 		return {
 			toggle:toggle,
 			goTo:goTo,
 			init:init
 		};
 	})();
+
+
+
+
+
+
+
+
+
+/*
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!	  UTILS	 !!!!!!!
+ *			!!!!!!!			 !!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+
+
+
+
+
 	var utils = (function(){
 		function init(){
 			$(document).scrollStop(snapToHeader);
@@ -152,6 +254,17 @@ window.script = (function(){
 			scrollTo:scrollTo
 		}
 	})();
+/*
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!	 		  !!!!!!!
+ *			!!!!!!! jQPlugins !!!!!!!
+ *			!!!!!!!			  !!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 	var jQPlugins = (function(){
 		function init(){
 			$.fn.scrollToBottom = scrollToBottom;
