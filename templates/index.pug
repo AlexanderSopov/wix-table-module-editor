@@ -18,7 +18,7 @@ html(lang="en")
         ul
           - for (var i=0; i<pages.length;i++)
             - var title = pages[i].title, url = "#"+title;
-            li(onclick="script.nav.goTo(this)" class=i==0 ? "active" : "")
+            li(onclick="script.nav.goTo(this)" class=i==0 ? "active" : "" data-value=title, id=title+"-nav")
               h3= title+"."
     div#header-img
       img(src="img/headerImg.jpg")

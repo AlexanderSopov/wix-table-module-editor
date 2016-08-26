@@ -38,16 +38,18 @@ window.script = (function(){
 		var isOpen,
 			active,
 			navbar,
-			pages;
+			pages,
+			offset;
 		function init(){
 			isOpen 		= false;
 			active 		= $("#navbar ul .active"),
 			navbar		= $("#navbar"),
-			pages		= [];
+			pages		= [],
+			offset		= 0;
 			$("#navbar ul li").each(function(i,e){
 				$(e).hover(hoverActive, hoverInactive);
 			});
-			$(".pages").each(function(i,e){
+			$(".page").each(function(i,e){
 				pages.push($(e));
 			});
 			headerImg.on("click", shut);
@@ -63,22 +65,31 @@ window.script = (function(){
 			if (elt.id == "logo"){
 				utils.scrollTo($("body"))
 				if(isOpen)
-					return shut();
+					shut();
 			}else if(isOpen){
-				utils.scrollTo($("#"+elt.innerHTML));
-				return shut();
+				var je = $(elt);
+				var id ="#" + je.attr("data-value");
+				if(je.hasClass("active")){
+					je.toggleClass("active");
+					active.toggleClass("active");
+				}
+				utils.scrollTo($(id));
+				setTimeout(function(){shut();},100);
 			}
 		}
 		//Private Methods
 		function open(){
 			if(!isOpen){
 				header.css("height", hdHeight*pages.length + "px");
+				navbar.css("top", offset);
 				isOpen = true;
 			}
 		}
 		function shut(){
 			if(isOpen){
 				header.css("height", hdHeight + "px");
+				offset = navbar.css("top");
+				navbar.css("top",0)
 				isOpen = false;			
 			}
 		}
@@ -91,15 +102,19 @@ window.script = (function(){
 			active.toggleClass("active");
 		}
 		function setActive(){
+			var weAreAt = $(document).scrollTop();
 			for (var i = pages.length-1; i>= 0; i--){
-				if (utils.isPassed(pages[i]))
-					return activate(pages[i]);
+				if (weAreAt > pages[i].offset().top - 170)
+					return activate(pages[i], i);
 			}
 		}
-		function activate($elt){
-			$elt.toggleClass(".active");
-			active.toggleClass(".active");
-			active = $elt;
+		function activate($elt, i){
+			var newAct = $("#"+$elt.attr("id")+"-nav");
+			newAct.toggleClass("active");
+			active.toggleClass("active");
+			active = newAct;
+			navbar.css("top", hdHeight *-1*i);
+			offset = navbar("top");
 		}
 		return {
 			toggle:toggle,
@@ -132,15 +147,9 @@ window.script = (function(){
 				}
 			}
 		}
-		function isPassed($elt){
-			if ($(document).scrollTop() > $elt.offset().top)
-				return true;
-			return false;
-		}
 		return {
 			init:init,
-			scrollTo:scrollTo,
-			isPassed:isPassed
+			scrollTo:scrollTo
 		}
 	})();
 	var jQPlugins = (function(){
