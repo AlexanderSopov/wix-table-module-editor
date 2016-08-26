@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	script.init();
+	setTimeout(function() {script.init();},50);
 });
 window.script = (function(){
 	var activeClass,
@@ -31,7 +31,7 @@ window.script = (function(){
 			jQPlugins.init();
 			utils.init();
 		})();
-
+		console.log(hdImgHeight);
 		body.css("top", (hdHeight + hdImgHeight) );
 	}
 	var nav = (function(){

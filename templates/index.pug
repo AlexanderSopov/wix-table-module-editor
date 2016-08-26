@@ -26,7 +26,7 @@ html(lang="en")
       .container
         - for(var i=0; i<pages.length;i++)
           - var page = pages[i];
-            div(id=page.title, class=i==0 ? 'page active' : 'page')
+            section(id=page.title, class=i==0 ? 'page active' : 'page')
               .title
                 h1=page.title+"."
               hr
