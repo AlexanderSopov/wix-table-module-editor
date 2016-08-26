@@ -104,7 +104,6 @@ window.script = (function(){
 			headerImg.on("click", help.shrink);
 			body.on("click", help.shrink);
 			$(window).scroll(scrollHandler);
-			animateNavbar(0,0);
 		}
 		function toggle(){
 			if(isExpanded)
@@ -134,6 +133,8 @@ window.script = (function(){
 			for (var i = lastTsh; i>= 0; i--)
 				if (passedTreshold(tresholds[i], weAreAt))
 					return animate(weAreAt, i);
+			animateRuler(weAreAt,0)
+
 		}
 		function passedTreshold(tsh, pos){
 			if (pos > tsh.startAt)
@@ -153,6 +154,8 @@ window.script = (function(){
 				progress	= relPos / tsh.height;
 				pxl			= (hdHeight * i) + (hdHeight * progress),
 				pxl			= pxl - offset;
+			if (pos < hdImgHeight+hdHeight)
+				ruler.css("top", "-155px")
 			ruler.css("top", pxl + "px");
 		}
 		function animateNavbar(pos, i){
