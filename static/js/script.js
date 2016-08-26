@@ -104,6 +104,7 @@ window.script = (function(){
 			headerImg.on("click", help.shrink);
 			body.on("click", help.shrink);
 			$(window).scroll(scrollHandler);
+			animateRuler(0,0);
 		}
 		function toggle(){
 			if(isExpanded)
@@ -155,7 +156,7 @@ window.script = (function(){
 				pxl			= (hdHeight * i) + (hdHeight * progress),
 				pxl			= pxl - offset;
 			if (pos < hdImgHeight+hdHeight)
-				ruler.css("top", "-155px")
+				ruler.css("top", "-100px")
 			ruler.css("top", pxl + "px");
 		}
 		function animateNavbar(pos, i){
