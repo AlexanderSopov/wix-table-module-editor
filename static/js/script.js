@@ -79,20 +79,16 @@ window.script = (function(){
 			activeLink,
 			navbar,
 			pages,
-			ruler,
 			offset,
-			winHeight,
 			linkHeight,
 			links;
 		function init(){
 			isExpanded 	= false;
 			navbar		= $("#navbar");
-			ruler 		= navbar.find("hr");
 			activeLink 	= navbar.find("ul .active");
 			pages		= [];
 			tresholds	= [];
 			offset		= 0;
-			winHeight	= $(window).height();
 			linkHeight	= hdHeight * 0.65;
 			links		= navbar.find("ul li");
 			var startAt = hdHeight+hdImgHeight;
@@ -139,8 +135,7 @@ window.script = (function(){
 				lastTsh	= tresholds.length-1;
 			for (var i = lastTsh; i>= 0; i--)
 				if (passedTreshold(tresholds[i], weAreAt))
-					return animate(weAreAt, i);
-			help.animateRuler(weAreAt,0)
+					return help.animateNavbar(weAreAt, i);
 		}
 		function passedTreshold(tsh, pos){
 			if (pos > tsh.startAt)
@@ -148,17 +143,9 @@ window.script = (function(){
 			return false;
 			//var link = $("#"+$elt.attr("id")+"-nav");
 		}
-		function animate(pos, i){
-			help.animateRuler(pos, i);
-			help.animateNavbar(pos, i);
-			console.log(isExpanded);
-		}
 
 		var help = (function(){
 			var tmpNavOffset = 0;
-			function roundNav(i){
-				navbar.css("top", (hdHeight*i*-1) - (i*2) + "px");
-			}
 			function hoverActive(){
 				$(this).toggleClass("hover");
 			}
@@ -169,10 +156,6 @@ window.script = (function(){
 			function expand(){
 				if(!isExpanded){
 					console.log(linkHeight)
-					links.each(function(i, el){
-						el.style.height = linkHeight*0.75 + "px";
-						el.childNodes[1].style.bottom = "0px"
-					});
 					header.css("height", linkHeight*pages.length + "px");
 					tmpNavOffset = navbar.css("top");
 					navbar.css("top", "0px");
@@ -184,47 +167,45 @@ window.script = (function(){
 					header.css("height", hdHeight + "px");
 					offset = navbar.css("top");
 					navbar.css("top",tmpNavOffset);
-					links.each(function(i, el){
-						el.style.height=hdHeight + "px";
-					});
 					isExpanded = false;			
 				}
 			}
-
-			function animateRuler(pos, i){
-				var tsh 		= tresholds[i],
-					offset		= 5,
-					relPos		= pos - tsh.startAt,
-					progress	= relPos / tsh.height;
-					pxl			= (hdHeight * i) + (hdHeight * progress),
-					pxl			= pxl - offset;
-				if (pos < hdImgHeight+hdHeight)
-					ruler.css("top", "-100px")
-				ruler.css("top", pxl + "px");
-			}
 			function animateNavbar(pos, i){
 				var tsh 	= tresholds[i],
-					offset	= 0.2 * tsh.height,
+					offset	= 1 * tsh.height,
 					relPos 	= pos - tsh.startAt;
-				if ((tsh.height-offset) < relPos)
-					moveNavbar(relPos-tsh.height+offset, offset, i);
-				else
-					roundNav(i)
+				moveNavbar(relPos-tsh.height+offset, offset, i);
 			}
-
 			function moveNavbar(pos, offset, i){
 				var progress 	= pos / offset,
-					height 		= (hdHeight*i) + (hdHeight*progress),
+					height 		= (hdHeight*(i-0.5)) + (hdHeight*progress),
 					height 		= height *-1;
-				// console.log(
-				// 	"pos", pos,
-				// 	"\noffset", offset,
-				// 	"\ni",i,
-				// 	"\nheight", height,
-				// 	"\nhdHeight", hdHeight);
-				if(i < pages.length-1)
+				/*console.log(
+					"pos", pos,
+					"\noffset", offset,
+				 	"\ni",i,
+				 	"\nheight", height,
+				 	"\nprogress", progress);*/
+				if (i==0){
+					if(progress > 0.5){
+						console.log("got here");
+						navbar.css("top", height +"px");
+					}else
+						roundNav(i);
+				}else if (i == pages.length-1){
+					if(progress<0.5){
+						console.log("got 2");
+						navbar.css("top", height +"px");
+					}else
+						roundNav(i);
+				}else{
+					console.log("got 3");
 					navbar.css("top", height +"px");
-				return;
+				}
+
+			}
+			function roundNav(i){
+				navbar.css("top", (hdHeight*i*-1) - (i*2) + "px");
 			}
 			return {
 				shrink:shrink,
@@ -233,7 +214,6 @@ window.script = (function(){
 				hoverInactive:hoverInactive,
 				roundNav:roundNav,
 				animateNavbar:animateNavbar,
-				animateRuler:animateRuler,
 				moveNavbar:moveNavbar
 			};
 		})();
