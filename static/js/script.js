@@ -182,33 +182,27 @@ window.script = (function(){
 			}
 			function animateNavbar(pos, i){
 				var tsh 	= tresholds[i],
-					offset	= 1 * tsh.height,
-					relPos 	= pos - tsh.startAt;
-				moveNavbar(relPos-tsh.height+offset, offset, i);
+					offset	= tsh.height,
+					relPos 	= pos + hdHeight - tsh.startAt;
+				moveNavbar(relPos, offset, i);
 			}
 			function moveNavbar(pos, offset, i){
 				var progress 	= pos / offset,
-					height 		= (hdHeight*(i-0.5)) + (hdHeight*progress),
+					height 		= (hdHeight*(i)) + (hdHeight*progress),
 					height 		= height *-1;
-				/*console.log(
+				console.log(
 					"pos", pos,
 					"\noffset", offset,
 				 	"\ni",i,
 				 	"\nheight", height,
-				 	"\nprogress", progress);*/
-				if (i==0){
-					if(progress > 0.5){
+				 	"\nprogress", progress);
+				if (i != pages.length-1)
+					if(progress > 0.3)
 						navbar.css("top", height +"px");
-					}else
+					else
 						roundNav(i);
-				}else if (i == pages.length-1){
-					if(progress<0.5){
-						navbar.css("top", height +"px");
-					}else
-						roundNav(i);
-				}else{
-					navbar.css("top", height +"px");
-				}
+				else
+					roundNav(i);
 
 			}
 			function roundNav(i){
