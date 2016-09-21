@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	setTimeout(function() {script.init();},150);
+	setTimeout(function() {script.init();},250);
 });
 
 /*
@@ -322,20 +322,11 @@ window.script = (function(){
 
 
 
-//,{
-//		"title":"Cases",
-//		"template":"",
-//		"content":  [{
-//			"h1":"Front-End",
-//			"h2": "Building User Interfaces",
-//			"p": [
-//				"There's a special pleasure in building interfaces.",
-//				"It's visual, it's wonderful to see people react to it and building it is wonderful."
-//			]
-//		},{
-//			"h1":"Back-End",
-//			"h2": "Orchestrating the Opera",
-//			"p": [
-//				"Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
-//		}]
-//	}*/
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84550083-1', 'auto');
+ga('send', 'pageview');
