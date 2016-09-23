@@ -1,9 +1,6 @@
 $(document).ready(function(){
-	setTimeout(function() {script.init();},150);
-	testOp();
+	setTimeout(function() {script.init();},250);
 });
-function testOp(){
-}
 
 /*
  *			!!!!!!!!!!!!!!!!!!!!!!!!
@@ -79,22 +76,22 @@ window.script = (function(){
 			activeLink,
 			navbar,
 			pages,
-			ruler,
 			offset,
-			winHeight,
 			linkHeight,
-			links;
+			links,
+			margin;
 		function init(){
 			isExpanded 	= false;
 			navbar		= $("#navbar");
-			ruler 		= navbar.find("hr");
 			activeLink 	= navbar.find("ul .active");
 			pages		= [];
 			tresholds	= [];
 			offset		= 0;
-			winHeight	= $(window).height();
 			linkHeight	= hdHeight * 0.65;
 			links		= navbar.find("ul li");
+			margin 		= navbar.find("ul li h3").css("margin-top");
+			margin 		= margin.substring(0,margin.length-2);
+			margin 		= Number(margin);
 			var startAt = hdHeight+hdImgHeight;
 			$("#navbar ul li").each(function(i,e){
 				$(e).hover(help.hoverActive, help.hoverInactive);
@@ -135,12 +132,13 @@ window.script = (function(){
 		}
 		//Private Methods
 		function scrollHandler(){
-			var weAreAt = $(document).scrollTop(),
-				lastTsh	= tresholds.length-1;
-			for (var i = lastTsh; i>= 0; i--)
-				if (passedTreshold(tresholds[i], weAreAt))
-					return animate(weAreAt, i);
-			help.animateRuler(weAreAt,0)
+			if (!isExpanded){
+				var weAreAt = $(document).scrollTop(),
+					lastTsh	= tresholds.length-1;
+				for (var i = lastTsh; i>= 0; i--)
+					if (passedTreshold(tresholds[i], weAreAt))
+						return help.animateNavbar(weAreAt, i);
+			}
 		}
 		function passedTreshold(tsh, pos){
 			if (pos > tsh.startAt)
@@ -148,17 +146,9 @@ window.script = (function(){
 			return false;
 			//var link = $("#"+$elt.attr("id")+"-nav");
 		}
-		function animate(pos, i){
-			help.animateRuler(pos, i);
-			help.animateNavbar(pos, i);
-			console.log(isExpanded);
-		}
 
 		var help = (function(){
 			var tmpNavOffset = 0;
-			function roundNav(i){
-				navbar.css("top", (hdHeight*i*-1) - (i*2) + "px");
-			}
 			function hoverActive(){
 				$(this).toggleClass("hover");
 			}
@@ -168,15 +158,14 @@ window.script = (function(){
 
 			function expand(){
 				if(!isExpanded){
-					console.log(linkHeight)
-					links.each(function(i, el){
-						el.style.height = linkHeight*0.75 + "px";
-						el.childNodes[1].style.bottom = "0px"
-					});
-					header.css("height", linkHeight*pages.length + "px");
+					header.css("height", (linkHeight*pages.length+margin) + "px");
 					tmpNavOffset = navbar.css("top");
-					navbar.css("top", "0px");
+					navbar.css("top", margin);
 					isExpanded = true;
+					links.each(function(i, el){
+						el.style.height = (linkHeight)+ "px";
+						el.childNodes[1].style["margin-top"] = "0px";
+					});
 				}
 			}
 			function shrink(){
@@ -184,47 +173,40 @@ window.script = (function(){
 					header.css("height", hdHeight + "px");
 					offset = navbar.css("top");
 					navbar.css("top",tmpNavOffset);
+					isExpanded = false;	
 					links.each(function(i, el){
-						el.style.height=hdHeight + "px";
-					});
-					isExpanded = false;			
+						el.style.height = hdHeight+ "px";
+						el.childNodes[1].style["margin-top"] = margin+"px";
+					});		
 				}
-			}
-
-			function animateRuler(pos, i){
-				var tsh 		= tresholds[i],
-					offset		= 5,
-					relPos		= pos - tsh.startAt,
-					progress	= relPos / tsh.height;
-					pxl			= (hdHeight * i) + (hdHeight * progress),
-					pxl			= pxl - offset;
-				if (pos < hdImgHeight+hdHeight)
-					ruler.css("top", "-100px")
-				ruler.css("top", pxl + "px");
 			}
 			function animateNavbar(pos, i){
 				var tsh 	= tresholds[i],
-					offset	= 0.2 * tsh.height,
-					relPos 	= pos - tsh.startAt;
-				if ((tsh.height-offset) < relPos)
-					moveNavbar(relPos-tsh.height+offset, offset, i);
-				else
-					roundNav(i)
+					offset	= tsh.height,
+					relPos 	= pos + hdHeight - tsh.startAt;
+				moveNavbar(relPos, offset, i);
 			}
-
 			function moveNavbar(pos, offset, i){
 				var progress 	= pos / offset,
-					height 		= (hdHeight*i) + (hdHeight*progress),
+					height 		= (hdHeight*(i)) + (hdHeight*progress),
 					height 		= height *-1;
-				// console.log(
-				// 	"pos", pos,
-				// 	"\noffset", offset,
-				// 	"\ni",i,
-				// 	"\nheight", height,
-				// 	"\nhdHeight", hdHeight);
-				if(i < pages.length-1)
-					navbar.css("top", height +"px");
-				return;
+				console.log(
+					"pos", pos,
+					"\noffset", offset,
+				 	"\ni",i,
+				 	"\nheight", height,
+				 	"\nprogress", progress);
+				if (i != pages.length-1)
+					if(progress > 0.3)
+						navbar.css("top", height +"px");
+					else
+						roundNav(i);
+				else
+					roundNav(i);
+
+			}
+			function roundNav(i){
+				navbar.css("top", (hdHeight*i*-1) - (i*2) + "px");
 			}
 			return {
 				shrink:shrink,
@@ -233,7 +215,6 @@ window.script = (function(){
 				hoverInactive:hoverInactive,
 				roundNav:roundNav,
 				animateNavbar:animateNavbar,
-				animateRuler:animateRuler,
 				moveNavbar:moveNavbar
 			};
 		})();
@@ -341,20 +322,11 @@ window.script = (function(){
 
 
 
-//,{
-//		"title":"Cases",
-//		"template":"",
-//		"content":  [{
-//			"h1":"Front-End",
-//			"h2": "Building User Interfaces",
-//			"p": [
-//				"There's a special pleasure in building interfaces.",
-//				"It's visual, it's wonderful to see people react to it and building it is wonderful."
-//			]
-//		},{
-//			"h1":"Back-End",
-//			"h2": "Orchestrating the Opera",
-//			"p": [
-//				"Building back-end services is very much like being the Producer of a movie.","You're not in the front, being the face of the product. In fact, if you're doing your job well, people aren't even noticing you at all.", "Seeing things flow in a orchestrated way, so smooth that people aren't even noticing the work being done, gives me a rare feeling of pleasure."]
-//		}]
-//	}*/
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84550083-1', 'auto');
+ga('send', 'pageview');
