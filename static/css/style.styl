@@ -178,18 +178,36 @@ header
 		width width
 		margin-left margin
 		margin-right margin
-		.page .content-wrap
-			display flex
-			flex-wrap wrap
-			.content
-				padding: 25px
-				width calc(50% - 50px)
-				text-align left
-			.left
-				text-align right
+		.page
+			.content-wrap
+				display flex
+				flex-wrap wrap
+				.content
+					padding 25px
+					width calc(50% - 50px)
+					text-align left
+				.left
+					text-align right
 	.ingress p
 		font-size 2em
 
+@media only screen and (min-width 1024px)
+	width = 1000px
+	margin = calc( (100% - 1000px) / 2 )
+	.container
+		width width
+		margin-left margin
+		margin-right margin
+		.page .intro.ingress
+			text-align justify
+			display flex
+			flex-wrap wrap
+			.left-p
+				width calc(50% - 25px)
+				padding-right 25px
+			.right-p
+				width calc(50% - 25px)
+				padding-left 25px
 
 @media only screen and (orientation: landscape)
 	#body

@@ -1,19 +1,20 @@
 $(document).ready(function(){
-	setTimeout(function() {script.init();},250);
+	$("#header-img img").load(function() {script.init();});
 });
 
-/*
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- *			!!!!!!!			 !!!!!!!
- *			!!!!!!!	 MAIN-M	 !!!!!!!
- *			!!!!!!!			 !!!!!!!
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- *			!!!!!!!!!!!!!!!!!!!!!!!!
- */
 
+
+/*
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!			 		 !!!!!!!
+ *			!!!!!!!	  MAIN-METHODS	 !!!!!!!
+ *			!!!!!!!			 		 !!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 window.script = (function(){
 	var activeClass,
 		header,
@@ -33,7 +34,7 @@ window.script = (function(){
 			header 		= $('header.stickyHD'),
 			page		= document.querySelectorAll(".page"),
 			body		= $("#body"),
-			headerImg	= $("#header-img"),
+			headerImg	= $("#header-img img"),
 			hdHeight 	= header.height(),
 			hdImgHeight	= headerImg.height(),
 			snapable	= true,
@@ -52,11 +53,6 @@ window.script = (function(){
 
 
 
-
-
-
-
-
 /*
  *			!!!!!!!!!!!!!!!!!!!!!!!!
  *			!!!!!!!!!!!!!!!!!!!!!!!!
@@ -68,9 +64,6 @@ window.script = (function(){
  *			!!!!!!!!!!!!!!!!!!!!!!!!
  *			!!!!!!!!!!!!!!!!!!!!!!!!
  */
-
-
-
 	var nav = (function(){
 		var isExpanded,
 			activeLink,
@@ -97,12 +90,17 @@ window.script = (function(){
 				$(e).hover(help.hoverActive, help.hoverInactive);
 			});
 			$(".page").each(function(i,e){
-				pages.push($(e));
-				tresholds.push({
-					startAt: startAt,
-					height: pages[i].height()
-				});
-				startAt += tresholds[i].height;
+				if(i==0)
+					startAt += $(e).height();
+				else{
+					console.log(i);
+					pages.push($(e));
+					tresholds.push({
+						startAt: startAt,
+						height: pages[i-1].height()
+					});
+					startAt += tresholds[i-1].height;
+				}
 			});
 			headerImg.on("click", help.shrink);
 			body.on("click", help.shrink);
@@ -144,7 +142,6 @@ window.script = (function(){
 			if (pos > tsh.startAt)
 				return true;
 			return false;
-			//var link = $("#"+$elt.attr("id")+"-nav");
 		}
 
 		var help = (function(){
@@ -190,12 +187,12 @@ window.script = (function(){
 				var progress 	= pos / offset,
 					height 		= (hdHeight*(i)) + (hdHeight*progress),
 					height 		= height *-1;
-				console.log(
-					"pos", pos,
-					"\noffset", offset,
-				 	"\ni",i,
-				 	"\nheight", height,
-				 	"\nprogress", progress);
+				// console.log(
+				// 	"pos", pos,
+				// 	"\noffset", offset,
+				//  	"\ni",i,
+				//  	"\nheight", height,
+				//  	"\nprogress", progress);
 				if (i != pages.length-1)
 					if(progress > 0.3)
 						navbar.css("top", height +"px");
@@ -244,12 +241,6 @@ window.script = (function(){
  *			!!!!!!!!!!!!!!!!!!!!!!!!
  *			!!!!!!!!!!!!!!!!!!!!!!!!
  */
-
-
-
-
-
-
 	var utils = (function(){
 		function init(){
 			$(document).scrollStop(snapToHeader);
@@ -319,8 +310,6 @@ window.script = (function(){
 	};
 	return publicAPI;
 })();
-
-
 
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
