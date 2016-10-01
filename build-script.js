@@ -4,7 +4,7 @@ var utils	= require('./lib/utils.js'),
 				locals: utils.getLocals(),
 				options:{
 					filename:"index.pug",
-					compileDebug:false,
+					compileDebug:true,
 					pretty:true
 				},
 				path: "./templates/index.pug"

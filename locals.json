@@ -1,4 +1,15 @@
-{
+{	
+	"intro": {
+		"title": "Alexander Sopov",
+		"content":{
+			"h2":"Not your usual engineer",
+			"h3": "I’m very lucky. I was born with many passions and I’ve been wise (some might say stubborn) enough to follow them throughout my life.",
+			"p": [
+				"<strong>I’ve been the</strong> swedish champion in heavy weight boxing, I’ve been a comedian on live TV and I’ve been a writer in two well-read blogs.",
+				"<strong>By some miracle,</strong> I also managed to leave those things behind, start all over and follow my biggest dream: To become an engineer."
+			]
+		}
+	},
 	"pages":[{
 		"title":"Merits",
 		"ingress":"At the end of the day, what you wan't to know is what can I do? Well, seek no further. Below follows my merits and capabalities.",
