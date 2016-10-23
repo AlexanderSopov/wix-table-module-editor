@@ -10,7 +10,8 @@ html(lang="en")
     style 
       include css/style.css
     script(src="https://code.jquery.com/jquery-2.2.4.min.js")
-    script(src="js/script.js")
+    script
+      include js/script.js
   body
     //
       HEADER STICKY, MENU AND LOGO
@@ -35,16 +36,13 @@ html(lang="en")
     div#body
       .container
 
-        //
-          INTRODUCTION
-        include includes/introduction.jade
-        
-
-        //
-          PAGES
-        - for(var i=0; i<pages.length;i++)
-          - var page = pages[i];
-            include includes/pages.jade
+        include includes/introduction.pug
+        - var page = pages[0];
+          include includes/merits.pug
+        - page = pages[1];
+          include includes/pages.pug
+        - page = pages[2];
+          include includes/pages.pug
       div#footer
         .container
           .logo
