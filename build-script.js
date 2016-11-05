@@ -5,7 +5,7 @@ var utils	= require('./lib/utils.js'),
 				options:{
 					filename:"index.pug",
 					compileDebug:true,
-					pretty:true
+					pretty:false
 				},
 				path: "./templates/index.pug"
 			};

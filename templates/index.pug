@@ -7,10 +7,14 @@ html(lang="en")
     meta(name="author", content="Alexander Sopov")
     meta(name="viewport", content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no")
     link(href="https://fonts.googleapis.com/css?family=Gentium+Basic|Josefin+Sans:300,400", rel="stylesheet")
-    link(rel="stylesheet", href="css/style.css")
+    style 
+      include css/style.css
     script(src="https://code.jquery.com/jquery-2.2.4.min.js")
-    script(src="js/script.js")
+    script
+      include js/script.js
   body
+    //
+      HEADER STICKY, MENU AND LOGO
     header.stickyHD
       div#logo(onclick="script.nav.goTo(this)")
         h3=logo+"."
@@ -20,48 +24,25 @@ html(lang="en")
             - var title = pages[i].title, url = "#"+title;
             li(onclick="script.nav.goTo(this)", data-value=title, id=title+"-nav")
               h3!= title+"."
+   
+    //
+      HEADER-IMG, SUPPOSED TO CHANGE BUT FUCK UT, KEEP IT STATIC ATM
+      ***
     div#header-img
       img(src="img/headerImg.jpg")
+    
+    //
+      BODY AND CONTAINER
     div#body
       .container
-        section(id=intro.title, class='page')
-          .title
-            h1=intro.title+"."
-          hr
-          h2=intro.content.h2
-          h3=intro.content.h3
-          .intro.ingress
-            - for(var i =0; i<intro.content.p.length; i++ )
-              if((i%2)==0)
-                .left-p
-                  p!=intro.content.p[i]
-              else
-                .right-p
-                  p!=intro.content.p[i]
-        - for(var i=0; i<pages.length;i++)
-          - var page = pages[i];
-            section(id=page.title, class=i==0 ? 'page active' : 'page')
-              .title
-                h1=page.title+"."
-              hr
-              .content-wrap
-                - for(var j=0; j<page.content.length;j++)
-                  - var content = page.content[j];
-                  div(id=content.h1, class=(j%2)==0 ? 'content left' : 'content')
-                    h2=content.h1
-                    h3=content.h2
-                    - for(var k=0; k<content.p.length;k++)
-                      - var p = content.p[k];
-                        p=p
-      div#footer
-        .container
-          .logo
-            h3=logo
-          .email
-            h3=contact.email
-          .github
-            h3=contact.github
-          .copyright
-            h3=copyright
+
+        include includes/introduction.pug
+        - var page = pages[0];
+          include includes/merits.pug
+        - page = pages[1];
+          include includes/pages.pug
+        - page = pages[2];
+          include includes/pages.pug
+      include includes/footer.pug
 
         
