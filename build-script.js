@@ -8,9 +8,18 @@ var utils	= require('./lib/utils.js'),
 					pretty:false
 				},
 				path: "./templates/index.pug"
-			};
+			},
+	babel 	= {
+		srcPath: "./static/js/script.js",
+		destPath: "./dist/js/script.js",
+		options: {
+			minified: true,
+			comments: false,
 
-utils.build(html, "./static/css/style.styl");
+		}
+	}
+
+utils.build(html, "./static/css/style.styl", babel);
 
 
 
