@@ -5,17 +5,17 @@ var utils	= require('./lib/utils.js'),
 				options:{
 					filename:"index.pug",
 					compileDebug:true,
-					pretty:false
+					pretty:true
 				},
 				path: "./templates/index.pug"
 			},
 	babel 	= {
-		srcPath: "./static/js/script.js",
-		destPath: "./dist/js/script.js",
+		srcPath: "./static/js/index.js",
+		destPath: "./dist/js/bundle.js",
+		presets: ["es2015"],
 		options: {
-			minified: true,
-			comments: false,
-
+			minified: false,
+			comments: true,
 		}
 	}
 
