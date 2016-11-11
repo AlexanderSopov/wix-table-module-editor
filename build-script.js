@@ -14,7 +14,7 @@ var utils	= require('./lib/utils.js'),
 		destPath: "./dist/js/bundle.js",
 		presets: ["es2015"],
 		options: {
-			minified: true,
+			minified: false,
 			comments: false,
 		}
 	},
@@ -27,7 +27,3 @@ var utils	= require('./lib/utils.js'),
 
 
 utils.build(html, stylus, babel);
-
-
-
-
