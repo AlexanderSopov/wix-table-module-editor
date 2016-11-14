@@ -1,126 +1,63 @@
-
-
+/*
+ *	API: {
+ *		parseSection: function(sectionString),
+ *		parseTable:	function(tableString)
+ *	}
+ *
+ */
 module.exports = (function(){
-	var preview;
-	var start = function(){
-		preview = $("#preview");
-		_base = preview.html();
-		preview.html(_css + _base);
-		descriptionUpdate("");
-		specificationUpdate("");
+	var parseSpecification = function(string){
+		var rows				= string.split("\n"),
+				separator		= "|",
+				content			= [];
+		console.log("Rows consist of: \n" + JSON.stringify(rows));
+		for (var i = 0; i<rows.length; i++){
+			var row = rows[i].split(separator);
+			row.pop();
+			content.push(row);
+		}
+		console.log("content consist of: \n" + JSON.stringify(content));
+		return content;
 	};
 
-
-	var descriptionUpdate = function(string){
-
+	var parseSection = function(str){
+		var h1 				= /(\n|^)#{1}.+(\n|$)/,
+				h2 				= /(\n|^)#{2}.+(\n|$)/,
+				h3 				= /(\n|^)#{3}.+(\n|$)/,
+				hX				= /(\n|^)#+.+(\n|$)/,
+				head			= {content:"", type:""},
+				body,
+				current;
+		if (current = h3.exec(str)){
+			head.type="h3";
+			head.content = current[0].replace(/\n/g, "").replace("###","");
+		}else if (current = h2.exec(str)){
+			head.type="h2";
+			head.content = current[0].replace(/\n/g, "").replace("##","");
+		}else if (current = h1.exec(str)){
+			head.type="h1";
+			head.content = current[0].replace(/\n/g, "").replace("#","");
+		}else{
+			return;
+		}
+		body = parseBody(str.split(hX));
+		return {head:head, body:body};
 	};
 
-	var specificationUpdate = function(string){
-
-	};
-
+	var parseBody = function(strArr){
+		var body  = [],
+				p			= [];
+		for(var i=0;i<strArr.length;i++){
+					p = strArr[i].split("\n");
+			for(var j=0; j<p.length;j++)
+				if (p[j] != "" && p[j] != "\n")
+					body.push({content:p[j], type:"p"});
+		}
+		return body;
+	}
 	var api = {
-		start:start,
-		descriptionUpdate:descriptionUpdate,
-		specificationUpdate:specificationUpdate
+		parseSection: parseSection,
+		parseSpecification: parseSpecification
 	}
 	return api;
-
 })();
-
-
-var _base;
-var _css = `
-		<style>
-			@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-			body{
-				margin:10px;
-				font-family: 'Open Sans', sans-serif;
-			}
-			/*
-			 *
-			 *	Tabb-menyn
-			 *
-			 */
-			 .tab-container{
-				 width:100%;
-				 margin:0px;
-				 padding:0px;
-				 cursor:pointer;
-			 }
-
-			 .tab{
-				 text-align:center;
-				 margin:0px;
-				 padding:0px;
-				 width:50%;
-				 display:inline-block;
-				 float:left;
-				 border-bottom: 5px solid grey;
-			 }
-
-			 .active {
-				 color: #f79431;
-				 border-color:#f79431;
-				 font-weight: 700;
-			 }
-
-			 .content {
- 				position:relative;
- 				top:40px;
-				 width: 100%;
-				 display:none;
-			 }
-			 .content h1:nth-child(1){
-				 margin-top:0px;
-			 }
-			 #description-content h1{
-				 font-size: 1.65em;
-				 margin-bottom:0px;
-			 }
-			 #description-content p{
-				 margin-top:8px;
-			 }
-
-			 .active-content {
-				 display: inline-block;
-			 }
-			/*
-			 *
-			 *	Beskrivning
-			 *
-			 */
-			/*
-			 *
-			 *	Tabell
-			 *
-			 */
-			table{
-				border-collapse: collapse;
-				width: 100%;
-			}
-
-			tr:nth-child(1) > td {
-				font-size:1.5em;
-				line-height: 1.3em;
-			}
-			tr:nth-child(odd) > td{
-				background-color: #f0efed;
-			}
-
-			td{
-				padding:6px;
-				padding-left:10px;
-				font-size: 0.9em;
-				font-weight: 400;
-			}
-			td:nth-child(1){
-				font-weight: bold;
-			}
-			td:nth-child(1){
-				border:none;
-				width:120px;
-			}
-
-		</style>
-`;

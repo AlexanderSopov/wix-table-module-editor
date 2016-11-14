@@ -13,20 +13,22 @@ html(lang="en")
     script
       include ../../dist/js/bundle.js
   body
-    h1 Wix Tabellredigerare
     div#editor
+      h1 Wix Tabellredigerare
       div#description-editor
         h2 Beskrivning
-        textarea
+        textarea(placeholder="#H1\n##H2\n###H3\nParagraph")
       div#specification-editor
-        h2 Specifikation
-        textarea
+        h2 Specifikationer
+        textarea(placeholder="row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|")
     div#preview
       div.tab-container
-        div#description.tab.active(onclick="_tab_module.openTab(this)")
+        div#description.tab.active(onclick="_func.openTab(this)")
           p Beskrivning
-        div#specification.tab(onclick="_tab_module.openTab(this)")
-          p Specifikation
+        div#specification.tab(onclick="_func.openTab(this)")
+          p Specifikationer
       div#description-content.content.active-content
       table#specification-content.content
+      script
+        include ../../dist/js/module-code-min.js
     div#code-snippet

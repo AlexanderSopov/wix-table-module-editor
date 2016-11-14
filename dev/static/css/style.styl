@@ -1,32 +1,43 @@
 
-
-h1
-	margin-left 20px
-	font-size 3.2em
-	font-family 'Palatino Linotype'
-h2
-	font-family 'Palatino Linotype'
-	font-size 1.8em
-h3
-	font-family 'Palatino Linotype'
-	font-size 1.3em
-p
-	font-family 'Josefin Sans', sans-serif
-	font-weight 400
-	font-size 1.2em
-
-textarea
-	resize none
-	width 100%
-	min-height 500px
-
 #editor
 	text-align center
+	display inline-block
+	width 100%
+	height auto
+	border 1px solid grey
+	h1
+		font-size 3.2em
+		font-family 'Palatino Linotype'
+		margin-bottom 10px
+	h2
+		font-family 'Palatino Linotype'
+		font-size 1.8em
+	h3
+		font-family 'Palatino Linotype'
+		font-size 1.3em
+	p
+		font-family 'Josefin Sans', sans-serif
+		font-weight 400
+		font-size 1.2em
+
+	textarea
+		resize none
+		width 100%
+		min-height 300px
+
 	div
 		width calc(50% - 40px)
 		margin 20px
 		float left
-
+#preview
+	width 100%
+#code-snippet
+	position relative
+	top	50px
+	border 1px solid grey
+	padding 20px
+	width calc(100% - 40px)
+	margin auto
 
 // @media only screen and (min-width 375px)
 //
