@@ -5,28 +5,40 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="description", content="Editor a wix-html-module")
     meta(name="author", content="Alexander Sopov")
-    meta(name="viewport", content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no")
+    meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
     link(href="https://fonts.googleapis.com/css?family=Gentium+Basic|Josefin+Sans:300,400", rel="stylesheet")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
     style
       include ../../dist/css/style.css
     script(src="https://code.jquery.com/jquery-2.2.4.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     script
       include ../../dist/js/bundle.js
   body
-    h1 Wix Tabellredigerare
-    div#editor
-      div#description-editor
-        h2 Beskrivning
-        textarea
-      div#specification-editor
-        h2 Specifikation
-        textarea
-    div#preview
-      div.tab-container
-        div#description.tab.active(onclick="_tab_module.openTab(this)")
-          p Beskrivning
-        div#specification.tab(onclick="_tab_module.openTab(this)")
-          p Specifikation
-      div#description-content.content.active-content
-      table#specification-content.content
-    div#code-snippet
+    div.container-fluid
+      div#head.row
+        div.col-xs-6.col-sm-2
+          img.img-responsive(src="img/qamcom.png")
+        div.col-xs-12.col-sm-8.text-center
+          h1 Wix Tabellredigerare
+      div#plate.row
+        div#description-editor.col-xs-12.col-sm-6.col-lg-3
+          h2 Beskrivning
+          textarea
+        div#specification-editor.col-xs-12.col-sm-6.col-lg-3
+          h2 Specifikation
+          textarea
+        div#preview-container.col-xs-12.col-sm-6.col-lg-6
+          div#preview
+            div.tab-container
+              div#description.tab.active(onclick="_tab_module.openTab(this)")
+                h2 Beskrivning
+              div#specification.tab(onclick="_tab_module.openTab(this)")
+                h2 Specifikation
+            div#description-content.content.active-content
+            table#specification-content.content
+        div#code-snippet.col-xs-12.col-sm-6.col-lg-12
+          div.row
+            h2.col-xs-12 Code to copy:
+          div.row
+            div#code.col-xs-12
