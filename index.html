@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="en"><head><title>Wix Module Editor</title><meta charset="utf-8"><meta name="description" content="Editor a wix-html-module"><meta name="author" content="Alexander Sopov"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><link href="https://fonts.googleapis.com/css?family=Gentium+Basic|Josefin+Sans:300,400" rel="stylesheet"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><style>@import url("https://fonts.googleapis.com/css?family=Lobster|Montserrat|Rokkitt|Yellowtail");
+h1{font-size:3.2em;font-family:'Montserrat',sans-serif}h2{font-family:'Rokkitt',serif;font-size:1.8em}h3{font-family:'Josefin Sans',sans-serif;font-size:1.3em}p{font-family:'Josefin Sans',sans-serif;font-weight:400;font-size:1.2em}textarea{color:#000;resize:none;width:100%;min-height:200px}#editor{text-align:center}#content-wrap{width:100%}body{height:100vh}.container-fluid{background:#00c6ff;background:-webkit-linear-gradient(to left,#00c6ff,#0072ff);background:linear-gradient(to left,#00c6ff,#0072ff);min-height:100%}#head div img{margin:15px 0}#head div h1{font-size:2em;margin:15px 0;padding:0}#preview{height:auto}#plate{background:#fff;min-height:500px}@media only screen and (min-width:769px){#head div img{margin:25px;padding:0}#head div h1{font-size:2.5em;margin:25px}}</style><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var _updater = require("./lib/updater.js");
+$(document).ready(function () {
+	$('#description-editor > textarea').bind('input propertychange', function () {
+		_updater.descriptionUpdate(this.value);
+	});
+	$('#specification-editor > textarea').bind('input propertychange', function () {
+		_updater.specificationUpdate(this.value);
+	});
+	_updater.start();
+});
+
+},{"./lib/updater.js":4}],2:[function(require,module,exports){
+"use strict";
+
+module.exports = function () {
+	var parseSpecification = function parseSpecification(string) {
+		var rows = string.split("\n"),
+		    separator = "|",
+		    content = [];
+
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i].split(separator);
+			row.pop();
+			content.push(row);
+		}
+
+		return content;
+	};
+
+	var parseSection = function parseSection(str) {
+		var h1 = /(\n|^)#{1}.+(\n|$)/,
+		    h2 = /(\n|^)#{2}.+(\n|$)/,
+		    h3 = /(\n|^)#{3}.+(\n|$)/,
+		    hX = /(\n|^)#+.+(\n|$)/,
+		    head = { content: "", type: "" },
+		    body,
+		    current;
+		if (current = h3.exec(str)) {
+			head.type = "h3";
+			head.content = current[0].replace(/\n/g, "").replace("###", "");
+		} else if (current = h2.exec(str)) {
+			head.type = "h2";
+			head.content = current[0].replace(/\n/g, "").replace("##", "");
+		} else if (current = h1.exec(str)) {
+			head.type = "h1";
+			head.content = current[0].replace(/\n/g, "").replace("#", "");
+		} else {
+			return;
+		}
+		body = parseBody(str.split(hX));
+		return { head: head, body: body };
+	};
+
+	var parseBody = function parseBody(strArr) {
+		var body = [],
+		    p = [];
+		for (var i = 0; i < strArr.length; i++) {
+			p = strArr[i].split("\n");
+			for (var j = 0; j < p.length; j++) {
+				if (p[j] != "" && p[j] != "\n") body.push({ content: p[j], type: "p" });
+			}
+		}
+		return body;
+	};
+	var api = {
+		parseSection: parseSection,
+		parseSpecification: parseSpecification
+	};
+	return api;
+}();
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+module.exports = function () {
+	var tablePopulator = function () {
+
+		var nrOfColumns = 0;
+
+		var populator = function populator(content) {
+			var table = document.getElementById("specification-content");
+			table.innerHTML = "";
+			if (!content) return;
+			nrOfColumns = 0;
+			for (var row = 0; row < content.length; row++) {
+				var cells = content[row].length;
+				if (cells > nrOfColumns) nrOfColumns = cells;
+			}
+			for (var i = 0; i < content.length; i++) {
+				table.appendChild(createRow(i, content));
+			}
+		};
+
+		function createRow(i, content) {
+			var rowContent = content[i],
+			    row = document.createElement("tr");
+			for (var col = 0; col < nrOfColumns; col++) {
+				row.appendChild(createCell(col, rowContent));
+			}return row;
+		}
+		function createCell(col, rowContent) {
+			var td = document.createElement("td");
+			var innerText = rowContent[col];
+			if (innerText) td.innerText = innerText;
+			return td;
+		}
+
+		return populator;
+	}();
+
+	var descPopulator = function () {
+		var activeTab = document.getElementById("description"),
+		    activeContent = document.getElementById("description-content");
+
+		var populateDesc = function populateDesc(description) {
+			var div = document.getElementById("description-content");
+			div.innerHTML = "";
+
+			for (var i = 0; i < description.length; i++) {
+				var head = createHead(description[i].head);
+				var bodyElements = createBody(description[i].body);
+				div.appendChild(head);
+				for (var el = 0; el < bodyElements.length; el++) {
+					div.appendChild(bodyElements[el]);
+				}
+			}
+		};
+		var createHead = function createHead(h) {
+			var head = document.createElement(h.type);
+			head.innerText = h.content;
+			return head;
+		};
+		var createBody = function createBody(body) {
+			var _body = [];
+			for (var i = 0; i < body.length; i++) {
+				if (body[i].type == "p") _body.push(createParagraph(body[i].content));else if (body[i].type == "ul") _body.push(createUL(body[i].content));
+			}
+			return _body;
+		};
+		var createParagraph = function createParagraph(content) {
+			var p = document.createElement("p");
+			p.innerText = content;
+			return p;
+		};
+
+		var createUL = function createUL(content) {
+			var ul = document.createElement("ul");
+			for (var i = 0; i < content.length; i++) {
+				var li = document.createElement("li");
+				li.innerText = content[i];
+				ul.appendChild(li);
+			}
+			return ul;
+		};
+		return populateDesc;
+	}();
+
+	return {
+		table: tablePopulator,
+		description: descPopulator
+	};
+}();
+
+},{}],4:[function(require,module,exports){
+"use strict";
+
+module.exports = function () {
+	var populator = require("./populator"),
+	    parser = require("./parser"),
+	    snippet,
+	    preview;
+	;
+	var start = function start() {
+		preview = $("#preview");
+		_base = preview.html();
+		preview.html(_css + _base);
+		$("#description-editor textarea").val("#H1\n##H2\n###H3\nParagraph");
+		descriptionUpdate("#H1\n##H2\n###H3\nParagraph");
+		$("#specification-editor textarea").val("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
+		specificationUpdate("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
+
+		snippet = $("#code");
+		preview = $("#preview");
+		snippet.text(preview.html());
+	};
+
+	var descriptionUpdate = function descriptionUpdate(str) {
+		var sectionRegex = /(?:\n|^)#(.*|\n[^#].*)+/g,
+		    description = [],
+		    sections = [],
+		    section;
+		if (str != "") {
+			while (section = sectionRegex.exec(str)) {
+				sections.push(section[0]);
+			}
+		}
+		if (!sections) return;
+
+		for (var i = 0; i < sections.length; i++) {
+			description.push(parser.parseSection(sections[i]));
+		}populator.description(description);
+	};
+
+	var specificationUpdate = function specificationUpdate(string) {
+		var content = parser.parseSpecification(string);
+		populator.table(content);
+	};
+
+	var api = {
+		start: start,
+		descriptionUpdate: descriptionUpdate,
+		specificationUpdate: specificationUpdate
+	};
+
+	var _base;
+	var _css = "\n\t\t<style>\n\t\t\t@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');\n\t\t\t#preview{\n\t\t\t\tmargin:10px;\n\t\t\t}\n\t\t\tp,\n\t\t\th1,\n\t\t\th2,\n\t\t\th3{\n\t\t\t\tfont-family: 'Open Sans', sans-serif;\n\t\t\t}\n\t\t\t/*\n\t\t\t *\n\t\t\t *\tTabb-menyn\n\t\t\t *\n\t\t\t */\n\t\t\t .tab-container{\n\t\t\t\t width:100%;\n\t\t\t\t margin:0px;\n\t\t\t\t padding:0px;\n\t\t\t\t cursor:pointer;\n\t\t\t }\n\n\t\t\t .tab{\n\t\t\t\t text-align:center;\n\t\t\t\t margin:0px;\n\t\t\t\t padding:0px;\n\t\t\t\t width:50%;\n\t\t\t\t display:inline-block;\n\t\t\t\t float:left;\n\t\t\t\t border-bottom: 5px solid grey;\n\t\t\t }\n\n\t\t\t .active {\n\t\t\t\t color: #f79431;\n\t\t\t\t border-color:#f79431;\n\t\t\t\t font-weight: 700;\n\t\t\t }\n\t\t\t .content {\n\t\t\t\t position:relative;\n\t\t\t\t top:40px;\n\t\t\t\t display:none;\n\t\t\t\t width: 100%;\n\t\t\t }\n\t\t\t .content h1:nth-child(1){\n\t\t\t\t margin-top:0px;\n\t\t\t }\n\t\t\t #description-content h1{\n\t\t\t\t font-size: 1.65em;\n\t\t\t\t margin-bottom:0px;\n\t\t\t }\n\t\t\t #description-content p{\n\t\t\t\t margin-top:8px;\n\t\t\t }\n\n\t\t\t .active-content {\n\t\t\t\t display: inline-block;\n\t\t\t }\n\t\t\t/*\n\t\t\t *\n\t\t\t *\tBeskrivning\n\t\t\t *\n\t\t\t */\n\t\t\t/*\n\t\t\t *\n\t\t\t *\tTabell\n\t\t\t *\n\t\t\t */\n\t\t\ttable{\n\t\t\t\tborder-collapse: collapse;\n\t\t\t}\n\t\t\ttbody{\n\t\t\t\twidth:100%;\n\t\t\t}\n\t\t\ttr{\n\t\t\t\twidth:100%;\n\t\t\t}\n\t\t\ttr:nth-child(1) > td {\n\t\t\t\tfont-size:1.5em;\n\t\t\t\tline-height: 1.3em;\n\t\t\t}\n\t\t\ttr:nth-child(odd) > td{\n\t\t\t\tbackground-color: #f0efed;\n\t\t\t}\n\n\t\t\ttd{\n\t\t\t\tpadding:6px;\n\t\t\t\tpadding-left:10px;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t\tfont-weight: 400;\n\t\t\t}\n\t\t\ttd:nth-child(1){\n\t\t\t\tfont-weight: bold;\n\t\t\t\tborder:none;\n\t\t\t\twidth:120px;\n\t\t\t}\n\n\t\t</style>\n\t";
+
+	return api;
+}();
+
+},{"./parser":2,"./populator":3}]},{},[1]);
+</script></head><body><div class="container-fluid"><div class="row" id="head"><div class="col-xs-6 col-sm-2"><img class="img-responsive" src="img/qamcom.png"></div><div class="col-xs-12 col-sm-8 text-center"><h1>Wix Tabellredigerare</h1></div></div><div class="row" id="plate"><div class="col-xs-12 col-sm-6 col-lg-3" id="description-editor"><h2>Beskrivning</h2><textarea placeholder="#H1
+##H2
+###H3
+Paragraph"></textarea></div><div class="col-xs-12 col-sm-6 col-lg-3" id="specification-editor"><h2>Specifikationer</h2><textarea placeholder="row1,col1|
+row2,col1|row2,col2|
+row3,col1|row3,col2|"></textarea></div><div class="col-xs-12 col-sm-6 col-lg-6" id="preview-container"><div id="preview"><div class="tab-container"><div class="tab active" id="description" onclick="_func.openTab(this)"><h2>Beskrivning</h2></div><div class="tab" id="specification" onclick="_func.openTab(this)"><h2>Specifikationer</h2></div></div><div id="content-wrap"><div class="content active-content" id="description-content"></div><table class="content" id="specification-content"></table></div><script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";window._func=function(){var activeTab=document.getElementById("description"),activeContent=document.getElementById("description-content");var openTab=function openTab(el){if(el==activeTab)return;if(activeTab)toggleClass(activeTab,"active");if(activeContent)toggleClass(activeContent,"active-content");activeTab=el;activeContent=document.getElementById(el.id+"-content");toggleClass(activeTab,"active");toggleClass(activeContent,"active-content")};var toggleClass=function toggleClass(el,className){if(el.classList){el.classList.toggle(className)}else{var classes=el.className.split(" ");var existingIndex=classes.indexOf(className);if(existingIndex>=0)classes.splice(existingIndex,1);else classes.push(className);el.className=classes.join(" ")}};return{openTab:openTab}}();
+
+},{}]},{},[1]);
+</script></div></div><div class="col-xs-12 col-sm-6 col-lg-12" id="code-snippet"><div class="row"><h2 class="col-xs-12">Code to copy:</h2></div><div class="row"><div class="col-xs-12" id="code"></div></div></div></div></div></body></html>
