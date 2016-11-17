@@ -26,7 +26,8 @@ textarea
 	// background: #cddccd; /* fallback for old browsers */
 	// background: -webkit-linear-gradient(to left, #cddccd , #eeeeee); /* Chrome 10-25, Safari 5.1-6 */
 	// background: linear-gradient(to left, #cddccd , #eeeeee); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+// *
+// 	border 1px solid black
 #editor
 	text-align center
 #content-wrap
@@ -47,11 +48,18 @@ body
 			margin 15px 0px
 			padding 0px
 #preview
-	height auto
+	min-height 300px
 #plate
 	background rgb(255,255,255)
 	min-height 500px
-
+#code
+	border 1px solid grey
+	padding 10px
+	margin 10px
+	margin-right 20px
+	width: calc(100% - 30px)
+#code-snippet h2
+	margin-bottom 0
 // @media only screen and (min-width 375px)
 //
 @media only screen and (min-width 769px)

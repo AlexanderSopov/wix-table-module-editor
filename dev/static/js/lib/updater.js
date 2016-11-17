@@ -13,9 +13,13 @@ module.exports = (function(){
 		$("#specification-editor textarea").val("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
 		specificationUpdate("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
 
+		var copycode = preview.html()
+			.replace(new RegExp("\\n", "g"), "")
+			.replace(new RegExp("\\t", "g"), "");
+		console.log(copycode);
 		snippet 	= $("#code");
 		preview		= $("#preview");
-		snippet.text(preview.html());
+		snippet.val(copycode);
 	};
 
 
@@ -106,7 +110,7 @@ module.exports = (function(){
 			 }
 
 			 .active-content {
-				 display: inline-block;
+				 display: table;
 			 }
 			/*
 			 *
