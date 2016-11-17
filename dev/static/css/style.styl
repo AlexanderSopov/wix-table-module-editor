@@ -1,44 +1,64 @@
 
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat|Rokkitt|Yellowtail')
+// font-family: 'Montserrat', sans-serif;
+// font-family: 'Lobster', cursive;
+// font-family: 'Rokkitt', serif;
+// font-family: 'Yellowtail', cursive;
+h1
+	font-size 3.2em
+	font-family 'Montserrat', sans-serif
+h2
+	font-family 'Rokkitt', serif
+	font-size 1.8em
+h3
+	font-family 'Josefin Sans', sans-serif
+	font-size 1.3em
+p
+	font-family 'Josefin Sans', sans-serif
+	font-weight 400
+	font-size 1.2em
+
+textarea
+	color black
+	resize none
+	width 100%
+	min-height 200px
+	// background: #cddccd; /* fallback for old browsers */
+	// background: -webkit-linear-gradient(to left, #cddccd , #eeeeee); /* Chrome 10-25, Safari 5.1-6 */
+	// background: linear-gradient(to left, #cddccd , #eeeeee); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 #editor
 	text-align center
-	display inline-block
-	width 100%
-	height auto
-	border 1px solid grey
-	h1
-		font-size 3.2em
-		font-family 'Palatino Linotype'
-		margin-bottom 10px
-	h2
-		font-family 'Palatino Linotype'
-		font-size 1.8em
-	h3
-		font-family 'Palatino Linotype'
-		font-size 1.3em
-	p
-		font-family 'Josefin Sans', sans-serif
-		font-weight 400
-		font-size 1.2em
-
-	textarea
-		resize none
-		width 100%
-		min-height 300px
-
+#content-wrap
+	width:100%;
+body
+	height 100vh
+.container-fluid
+	background: #00c6ff; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	min-height 100%
+#head
 	div
-		width calc(50% - 40px)
-		margin 20px
-		float left
+		img
+			margin 15px 0px
+		h1
+			font-size 2em
+			margin 15px 0px
+			padding 0px
 #preview
-	width 100%
-#code-snippet
-	position relative
-	top	50px
-	border 1px solid grey
-	padding 20px
-	width calc(100% - 40px)
-	margin auto
+	height auto
+#plate
+	background rgb(255,255,255)
+	min-height 500px
 
 // @media only screen and (min-width 375px)
 //
-// @media only screen and (min-width 769px)
+@media only screen and (min-width 769px)
+	#head div
+		img
+			margin 25px
+			padding 0px
+		h1
+			font-size 2.5em
+			margin 25px

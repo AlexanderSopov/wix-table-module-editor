@@ -13,7 +13,7 @@ module.exports = (function(){
 		$("#specification-editor textarea").val("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
 		specificationUpdate("row1,col1|\nrow2,col1|row2,col2|\nrow3,col1|row3,col2|");
 
-		snippet 	= $("#code-snippet");
+		snippet 	= $("#code");
 		preview		= $("#preview");
 		snippet.text(preview.html());
 	};
@@ -120,6 +120,12 @@ module.exports = (function(){
 			 */
 			table{
 				border-collapse: collapse;
+			}
+			tbody{
+				width:100%;
+			}
+			tr{
+				width:100%;
 			}
 			tr:nth-child(1) > td {
 				font-size:1.5em;

@@ -32,7 +32,6 @@ module.exports = (function(){
 		}
 
 		function createRow(i, content){
-			console.log("got here");
 			var rowContent 	= content[i],
 					row 				=	document.createElement("tr");
 			for (var col=0;col<nrOfColumns;col++)

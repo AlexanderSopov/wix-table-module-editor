@@ -10,13 +10,13 @@ module.exports = (function(){
 		var rows				= string.split("\n"),
 				separator		= "|",
 				content			= [];
-		console.log("Rows consist of: \n" + JSON.stringify(rows));
+		// console.log("Rows consist of: \n" + JSON.stringify(rows));
 		for (var i = 0; i<rows.length; i++){
 			var row = rows[i].split(separator);
 			row.pop();
 			content.push(row);
 		}
-		console.log("content consist of: \n" + JSON.stringify(content));
+		// console.log("content consist of: \n" + JSON.stringify(content));
 		return content;
 	};
 
