@@ -60,3 +60,6 @@ locals.json
 The static folder contains the static js, css and images for the editor itself (not its output and preview)
 The templates folder contains the index.pug file that is a html-template file (a lot easier and convenient way to write html). For more info on this, google "pug template".
 locals.json is used for passing variables into the index.pug and is currently unused.
+
+## Publishing your changes
+Once you're done, make sure that the build-script has ran through all of your changes (if you have yarn run run monitoring the files then this is done automatically). All you need to do is to zip the build folder, rename it into editor.zip and publish it in [this article](https://intranet.qamcom.se/display/TIPS/Edit+Wix+Modules)
